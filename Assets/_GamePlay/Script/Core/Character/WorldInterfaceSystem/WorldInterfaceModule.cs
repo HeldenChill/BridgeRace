@@ -4,20 +4,22 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.WorldInterfaceSystem
 {
-    public class WorldInterfaceModule : MonoBehaviour
+    public class WorldInterfaceModule : AbstractModuleSystem<WorldInterfaceData,WorldInterfaceParameter>
     {
-        protected CharacterWorldInterfaceSystem system;
+        WorldInterfaceData Data;
+        WorldInterfaceParameter Parameter;
         [SerializeField]
         List<BaseSensor> sensors;
-        public virtual void Initialize(CharacterWorldInterfaceSystem system)
+        public override void Initialize(WorldInterfaceData Data,WorldInterfaceParameter Parameter)
         {
-            this.system = system;
+            this.Data = Data;
+            this.Parameter = Parameter;
             for(int i = 0; i < sensors.Count; i++)
             {
-                sensors[i].Initialize(system.Data);
+                sensors[i].Initialize(this.Data);
             }
         }
-        public virtual void UpdateData()
+        public override void UpdateData()
         {
             for (int i = 0; i < sensors.Count; i++)
             {

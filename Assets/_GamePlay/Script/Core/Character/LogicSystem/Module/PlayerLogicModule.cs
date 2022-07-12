@@ -14,14 +14,17 @@ namespace BridgeRace.Core.Character.LogicSystem
                 velocity.y = -2f;
             }
             velocity = Parameter.MoveDirection * Parameter.Speed;
-            Event.SetVelocity(velocity);
 
             if (Parameter.IsGrounded && Parameter.Jump && Parameter.Velocity.y < 0.01f)
             {
                 velocity.y = Parameter.JumpVelocity;
             }
-            velocity.y += Parameter.GRAVITY * Time.deltaTime;
-            Event.SetVelocity(velocity);
+            else
+            {
+                velocity.y = Parameter.Velocity.y;
+            }
+                      
+            Event.SetVelocity(velocity);            
         }
     }
 }

@@ -4,17 +4,21 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.LogicSystem
 {
-    public abstract class AbstractLogicModule : MonoBehaviour
+    public abstract class AbstractLogicModule : AbstractModuleSystem<LogicData,LogicParameter>
     {
         protected LogicParameter Parameter;
         protected LogicData Data;
         protected LogicEvent Event;
-        public void Initialize(CharacterLogicSystem system)
+        public override void Initialize(LogicData Data,LogicParameter Parameter)
         {
-            Parameter = system.Parameter;
-            Data = system.Data;
-            Event = system.Event;
+            this.Parameter = Parameter;
+            this.Data = Data;
         }
-        public abstract void UpdateData();
+
+        public void Initialize(LogicData Data, LogicParameter Parameter, LogicEvent Event)
+        {
+            this.Event = Event;
+            Initialize(Data, Parameter);
+        }
     }
 }

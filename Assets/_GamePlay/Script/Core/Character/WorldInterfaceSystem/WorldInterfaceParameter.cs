@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.WorldInterfaceSystem
 {
-    public class WorldInterfaceParameter : ScriptableObject
+    public class WorldInterfaceParameter : AbstractParameterSystem
     {
         
     }

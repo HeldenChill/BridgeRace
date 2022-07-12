@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.PhysicSystem
 {
-    using Utilitys;
     public class PhysicData : AbstractDataSystem<PhysicData>
     {
         public Vector3 Velocity;

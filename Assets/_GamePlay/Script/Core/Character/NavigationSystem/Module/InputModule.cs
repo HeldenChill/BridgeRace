@@ -17,7 +17,6 @@ namespace BridgeRace.Core.Character.NavigationSystem
             if (Input.GetButtonDown("Jump"))
             {
                 Data.Jump = true;
-                Debug.Log("Jump");
             }
             else
             {

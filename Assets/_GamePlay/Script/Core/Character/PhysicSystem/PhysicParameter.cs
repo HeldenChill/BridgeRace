@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.PhysicSystem
 {
-    public class PhysicParameter : ScriptableObject
-    {              
-        public float Speed = 12f;
-        public float JumpHeight = 2f;
+    public class PhysicParameter : AbstractParameterSystem
+    {
+        public readonly float GRAVITY = -9.81f;
+        public float GravityParameter = 1;
 
+        public float JumpHeight = 2f;
     }
 }

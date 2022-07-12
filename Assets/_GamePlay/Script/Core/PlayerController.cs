@@ -33,11 +33,11 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         #region Update Data Event
-        WorldInterfaceSystem.Data.OnUpdateData += NavigationSystem.ReceiveInformation;
-        WorldInterfaceSystem.Data.OnUpdateData += LogicSystem.ReceiveInformation;
+        WorldInterfaceSystem.OnUpdateData += NavigationSystem.ReceiveInformation;
+        WorldInterfaceSystem.OnUpdateData += LogicSystem.ReceiveInformation;
 
-        NavigationSystem.Data.OnUpdateData += LogicSystem.ReceiveInformation;
-        PhysicSystem.Data.OnUpdateData += LogicSystem.ReceiveInformation;
+        NavigationSystem.OnUpdateData += LogicSystem.ReceiveInformation;
+        PhysicSystem.OnUpdateData += LogicSystem.ReceiveInformation;
 
         LogicSystem.Event.SetVelocity += PhysicSystem.SetVelocity;
         #endregion
@@ -46,11 +46,11 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         #region Update Data Event
-        WorldInterfaceSystem.Data.OnUpdateData -= NavigationSystem.ReceiveInformation;
-        WorldInterfaceSystem.Data.OnUpdateData -= LogicSystem.ReceiveInformation;
+        WorldInterfaceSystem.OnUpdateData -= NavigationSystem.ReceiveInformation;
+        WorldInterfaceSystem.OnUpdateData -= LogicSystem.ReceiveInformation;
 
-        NavigationSystem.Data.OnUpdateData -= LogicSystem.ReceiveInformation;
-        PhysicSystem.Data.OnUpdateData -= LogicSystem.ReceiveInformation;
+        NavigationSystem.OnUpdateData -= LogicSystem.ReceiveInformation;
+        PhysicSystem.OnUpdateData -= LogicSystem.ReceiveInformation;
 
         LogicSystem.Event.SetVelocity -= PhysicSystem.SetVelocity;
         #endregion
@@ -61,5 +61,6 @@ public class PlayerController : MonoBehaviour
         WorldInterfaceSystem.Run();
         NavigationSystem.Run();
         LogicSystem.Run();
+        PhysicSystem.Run();
     }
 }

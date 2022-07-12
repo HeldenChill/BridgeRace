@@ -6,32 +6,17 @@ namespace BridgeRace.Core.Character.LogicSystem
     using WorldInterfaceSystem;
     using NavigationSystem;
     using PhysicSystem;
-    public class CharacterLogicSystem : AbstractCharacterSystem
+    public class CharacterLogicSystem : AbstractCharacterSystem<AbstractLogicModule,LogicData,LogicParameter>
     {
-        private AbstractLogicModule module;
-        public LogicData Data;
         public LogicEvent Event;
-        public LogicParameter Parameter;
-
         public CharacterLogicSystem(AbstractLogicModule module)
         {
             Data = ScriptableObject.CreateInstance(typeof(LogicData)) as LogicData;
             Parameter = ScriptableObject.CreateInstance(typeof(LogicParameter)) as LogicParameter;
             Event = ScriptableObject.CreateInstance(typeof(LogicEvent)) as LogicEvent;
             this.module = module;
-            module.Initialize(this);
+            module.Initialize(Data,Parameter,Event);
         }
-
-        protected override void UpdateData()
-        {
-            module.UpdateData();
-        }
-
-        protected override void InvokeOnUpdateData()
-        {
-            Data.InvokeOnUpdateData();
-        }
-
         public void ReceiveInformation(WorldInterfaceData Data)
         {
             Parameter.IsGrounded = Data.IsGrounded;

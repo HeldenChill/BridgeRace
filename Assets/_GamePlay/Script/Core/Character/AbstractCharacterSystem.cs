@@ -4,10 +4,25 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character
 {
-    public abstract class AbstractCharacterSystem
+    using System;
+    public abstract class AbstractCharacterSystem<M,D,P>
+        where M : AbstractModuleSystem<D,P>
+        where D : AbstractDataSystem<D>
+        where P : AbstractParameterSystem
     {
-        protected abstract void UpdateData();
-        protected abstract void InvokeOnUpdateData();
+        public event Action<D> OnUpdateData;
+        protected M module;
+        protected D Data;
+        protected P Parameter;
+        protected virtual void UpdateData()
+        {
+            module.UpdateData();
+        }
+        protected virtual void InvokeOnUpdateData()
+        {
+            D data = Data.OnUpdateData();
+            OnUpdateData?.Invoke(data);
+        }
         public void Run()
         {
             UpdateData();

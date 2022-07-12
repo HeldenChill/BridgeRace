@@ -4,17 +4,16 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.NavigationSystem
 {
-    public abstract class AbstractNavigationModule : MonoBehaviour
+    public abstract class AbstractNavigationModule : AbstractModuleSystem<NavigationData,NavigationParameter>
     {
         protected NavigationData Data;
         protected NavigationParameter Parameter;
 
-        public void Initialize(CharacterNavigationSystem system)
+        public override void Initialize(NavigationData Data,NavigationParameter Parameter)
         {
-            Data = system.Data;
-            Parameter = system.Parameter;
+            this.Data = Data;
+            this.Parameter = Parameter;
         }
 
-        public abstract void UpdateData();
     }
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BridgeRace.Core.Character.PhysicSystem
 {
-    public abstract class AbstractPhysicModule : MonoBehaviour
+    public abstract class AbstractPhysicModule : AbstractModuleSystem<PhysicData,PhysicParameter>
     {
         protected PhysicData Data;
         protected PhysicParameter Parameter;
-        public void Initialize(CharacterPhysicSystem system)
+        public override void Initialize(PhysicData Data,PhysicParameter Parameter)
         {
-            Data = system.Data;
-            Parameter = system.Parameter;
+            this.Data = Data;
+            this.Parameter = Parameter;
         }
-        public abstract void SetVelocity(Vector3 velocity);
+        public abstract void SetVelocity(Vector3 velocity);    
     }
 }
