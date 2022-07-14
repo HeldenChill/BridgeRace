@@ -12,6 +12,11 @@ namespace BridgeRace.Core.Character.PhysicSystem {
             Data.Velocity = velocity;
         }
 
+        public override void SetRotation(Quaternion rotation)
+        {
+            gameObject.transform.rotation = rotation;
+        }
+
         public override void UpdateData()
         {
             if (Parameter.GravityParameter < 0.001f) return;

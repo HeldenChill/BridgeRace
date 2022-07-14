@@ -38,10 +38,14 @@ namespace Utilitys
             }
         }
 
-        public void Push(GameObject obj)
+        public void Push(GameObject obj,bool checkContain = true)
         {
-            if (objects.Contains(obj))
-                return;
+            if (checkContain)
+            {
+                if (objects.Contains(obj))
+                    return;
+            }
+            
 
             objects.Enqueue(obj);
 

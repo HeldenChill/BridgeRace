@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BridgeRace.Core.Character.PhysicSystem
 {
+    using System;
     using WorldInterfaceSystem;
     public class CharacterPhysicSystem : AbstractCharacterSystem<AbstractPhysicModule,PhysicData,PhysicParameter>
     {
@@ -19,5 +20,9 @@ namespace BridgeRace.Core.Character.PhysicSystem
             module.SetVelocity(velocity);
         }
 
+        public void SetRotation(Quaternion rotation)
+        {
+            module.SetRotation(rotation);
+        }
     }
 }

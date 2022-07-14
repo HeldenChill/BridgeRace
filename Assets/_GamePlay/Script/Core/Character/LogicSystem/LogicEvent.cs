@@ -7,6 +7,6 @@ namespace BridgeRace.Core.Character.LogicSystem
     public class LogicEvent : ScriptableObject
     {
         public Action<Vector3> SetVelocity;
-
+        public Action<Quaternion> SetRotation;
     }
 }

@@ -12,6 +12,7 @@ namespace BridgeRace.Core.Character.PhysicSystem
             this.Data = Data;
             this.Parameter = Parameter;
         }
-        public abstract void SetVelocity(Vector3 velocity);    
+        public abstract void SetVelocity(Vector3 velocity);
+        public abstract void SetRotation(Quaternion rotation);
     }
 }

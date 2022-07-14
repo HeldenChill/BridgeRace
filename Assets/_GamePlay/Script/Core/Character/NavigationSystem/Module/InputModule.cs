@@ -11,7 +11,7 @@ namespace BridgeRace.Core.Character.NavigationSystem
             float x = Input.GetAxisRaw("Horizontal");
             float z = Input.GetAxisRaw("Vertical");
 
-            Vector3 move = (transform.right * x + transform.forward * z).normalized;
+            Vector3 move = (Vector3.right * x + Vector3.forward * z).normalized;
             Data.MoveDirection = move;
 
             if (Input.GetButtonDown("Jump"))
