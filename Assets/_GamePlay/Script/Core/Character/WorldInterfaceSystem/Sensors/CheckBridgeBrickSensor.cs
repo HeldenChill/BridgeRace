@@ -8,7 +8,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
     public class CheckBridgeBrickSensor : BaseSensor
     {
         [SerializeField]
-        Transform bridgeBrickCheck;
+        List<Transform> bridgeBrickChecks;
         [SerializeField]
         float maxDistance = 0.3f;
         [SerializeField]
@@ -19,21 +19,26 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
 
         public override void UpdateData()
         {
-            RaycastHit hit;
-            ray = new Ray(bridgeBrickCheck.position, Vector3.down);
-            if (Physics.Raycast(ray,out hit,maxDistance,layer))
+            for(int i = 0; i < bridgeBrickChecks.Count; i++)
             {
-                BridgeBrick brick = GetBridgeBrickInstance(hit.collider);
-                if(brick != null)
+                RaycastHit hit;
+                ray = new Ray(bridgeBrickChecks[i].position, Vector3.down);
+                if (Physics.Raycast(ray, out hit, maxDistance, layer))
                 {
-                    Data.BridgeBrick = brick;
-                    //Debug.Log(brick.GetInstanceID());
+                    BridgeBrick brick = GetBridgeBrickInstance(hit.collider);
+                    if (brick != null)
+                    {
+                        Data.BridgeBrick = brick;
+                        break;
+                        //Debug.Log(brick.GetInstanceID());
+                    }
+                }
+                else
+                {
+                    Data.BridgeBrick = null;
                 }
             }
-            else
-            {
-                Data.BridgeBrick = null;
-            }
+            
             
         }
 
@@ -63,10 +68,16 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
 
         private void OnDrawGizmos()
         {
-            if (bridgeBrickCheck != null)
+            if (bridgeBrickChecks != null)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawLine(bridgeBrickCheck.position, bridgeBrickCheck.position + maxDistance * Vector3.down);
+                Gizmos.DrawLine(bridgeBrickChecks[0].position, bridgeBrickChecks[0].position + maxDistance * Vector3.down);
+
+                Gizmos.color = Color.green;
+                for(int i = 1; i < bridgeBrickChecks.Count; i++)
+                {
+                    Gizmos.DrawLine(bridgeBrickChecks[i].position, bridgeBrickChecks[i].position + maxDistance * Vector3.down);
+                }
             }
         }
     }

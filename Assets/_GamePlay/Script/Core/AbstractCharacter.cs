@@ -13,9 +13,6 @@ namespace BridgeRace.Core
     {
         [SerializeField]
         protected BrickColor type;
-        protected CharacterData Data;
-        [SerializeField]
-        protected CheckCollide BrickCollide;
         [SerializeField]
         protected SkinnedMeshRenderer mesh;
         [SerializeField]
@@ -30,53 +27,12 @@ namespace BridgeRace.Core
         }
         protected virtual void OnEnable()
         {            
-            BrickCollide.OnCollider += OnCollider;
+        //    BrickCollide.OnCollider += OnCollider;
         }
 
         protected virtual void OnDisable()
         {
-            BrickCollide.OnCollider -= OnCollider;
-        }
-
-        private void OnCollider(Collider other)
-        {
-            EatBrick brick = other.GetComponent<EatBrick>();
-            if(brick != null)
-            {
-                AddBrick(brick);
-            }
-        }
-
-        public EatBrick GetBrick()
-        {
-            if (Data.Bricks.Count == 0)
-            {
-                return null;
-            }
-            else
-            {
-                EatBrick brick = (EatBrick)Data.Bricks.Pop();
-                //TO DO: Push this brick to pool
-                return brick;
-            }
-        }
-
-        public void AddBrick(EatBrick brick)
-        {
-            if (brick.Color == type || brick.Color == BrickColor.Gray)
-            {
-                if(brick.Color == BrickColor.Gray)
-                {
-                    brick.ChangeColor(type);
-                }
-
-                Data.Bricks.Push(brick);
-                Vector3 pos = Vector3.zero;
-                pos.y = (Data.Bricks.Count - 1) * GameConst.EAT_BRICK_HEIGHT;
-                brick.gameObject.transform.parent = ContainBrick;
-                brick.gameObject.transform.localPosition = pos;
-                brick.gameObject.transform.localRotation = Quaternion.identity;
-            }
+            //BrickCollide.OnCollider -= OnCollider;
         }
 
         public virtual void ChangeColor(BrickColor color)

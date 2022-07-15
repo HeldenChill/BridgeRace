@@ -37,7 +37,7 @@ public class PlayerController : AbstractCharacter
         LogicSystem = new CharacterLogicSystem(LogicModule);
         PhysicSystem = new CharacterPhysicSystem(PhysicModule);
 
-        Data = ScriptableObject.CreateInstance(typeof(CharacterData)) as CharacterData;
+        LogicSystem.SetCharacterInformation(type, ContainBrick);
     }
 
     protected override void OnEnable()

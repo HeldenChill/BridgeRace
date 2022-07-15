@@ -6,6 +6,8 @@ namespace BridgeRace.Core.Character.LogicSystem
     using WorldInterfaceSystem;
     using NavigationSystem;
     using PhysicSystem;
+    using BridgeRace.Core.Brick;
+
     public class CharacterLogicSystem : AbstractCharacterSystem<AbstractLogicModule,LogicData,LogicParameter>
     {
         public LogicEvent Event;
@@ -17,10 +19,17 @@ namespace BridgeRace.Core.Character.LogicSystem
             this.module = module;
             module.Initialize(Data,Parameter,Event);
         }
+
+        public void SetCharacterInformation(BrickColor CharacterType,Transform ContainBrick)
+        {
+            Parameter.CharacterType = CharacterType;
+            Parameter.ContainBrick = ContainBrick;
+        }
         public void ReceiveInformation(WorldInterfaceData Data)
         {
             Parameter.IsGrounded = Data.IsGrounded;
             Parameter.BridgeBrick = Data.BridgeBrick;
+            Parameter.EatBricks = Data.EatBricks;
         }
 
         public void ReceiveInformation(NavigationData Data)

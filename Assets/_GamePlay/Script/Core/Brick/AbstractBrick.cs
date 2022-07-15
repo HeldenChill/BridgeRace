@@ -28,7 +28,11 @@ namespace BridgeRace.Core.Brick
         public abstract void Interact(AbstractCharacter character);
         protected virtual void Start()
         {
-            ChangeColor(type);
+            Material mat = GameplayManager.Inst.GetMaterial(type);
+            if (mesh.material != mat)
+            {
+                mesh.material = mat;
+            }
         }
         public virtual void ChangeColor(BrickColor color)
         {

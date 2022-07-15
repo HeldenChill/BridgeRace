@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BridgeRace.Core.Character.LogicSystem
 {
+    using BridgeRace.Core.Brick;
     using Utilitys;
-    public class PlayerLogicModule : AbstractLogicModule
+    public class CharacterLogicModule : AbstractLogicModule
     {
         private Vector3 velocity;
         private Quaternion rotation;
@@ -12,8 +13,22 @@ namespace BridgeRace.Core.Character.LogicSystem
         public override void UpdateData()
         {
             CollideBridgeBrickHandle();
+            CollideEatBrickHandle();
             RotationHandle();
             MovementHandle();                 
+        }
+        private void CollideEatBrickHandle()
+        {
+            if(Parameter.ContainBrick != null)
+            {
+                if(Parameter.EatBricks != null)
+                {
+                    for(int i = 0; i < Parameter.EatBricks.Count; i++)
+                    {
+                        AddBrick(Parameter.EatBricks[i]);
+                    }
+                }
+            }
         }
         private void CollideBridgeBrickHandle()
         {
@@ -51,6 +66,39 @@ namespace BridgeRace.Core.Character.LogicSystem
             }
 
             Event.SetVelocity(velocity);
+        }
+
+        public EatBrick GetBrick()
+        {
+            if (Data.Bricks.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                EatBrick brick = (EatBrick)Data.Bricks.Pop();
+                //TO DO: Push this brick to pool
+                return brick;
+            }
+        }
+
+        public void AddBrick(EatBrick brick)
+        {
+            if (brick.Color == Parameter.CharacterType || brick.Color == BrickColor.Gray)
+            {
+                if (brick.Color == BrickColor.Gray)
+                {
+                    brick.ChangeColor(Parameter.CharacterType);
+                }
+
+                Data.Bricks.Push(brick);
+                Vector3 pos = Vector3.zero;
+                pos.y = (Data.Bricks.Count - 1) * GameConst.EAT_BRICK_HEIGHT;
+                brick.gameObject.transform.parent = Parameter.ContainBrick;
+                brick.gameObject.transform.localPosition = pos;
+                brick.gameObject.transform.localRotation = Quaternion.identity;
+                //Debug.Log(Parameter.EatBricks.Count + ": "+ brick.GetInstanceID());
+            }
         }
 
     }
