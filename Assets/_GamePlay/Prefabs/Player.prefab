@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2140401199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140401200}
+  m_Layer: 0
+  m_Name: BridgeCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2140401200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140401199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.309, z: 0.446}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 557249585805068357}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &557249585805068356
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +41,7 @@ GameObject:
   - component: {fileID: 557249585805068357}
   - component: {fileID: 557249585805068475}
   - component: {fileID: 557249585805068474}
+  - component: {fileID: 1228601965}
   m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
@@ -30,6 +61,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 557249585871592800}
+  - {fileID: 2140401200}
   m_Father: {fileID: 557249586350183314}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensors:
   - {fileID: 557249585805068474}
+  - {fileID: 1228601965}
 --- !u!114 &557249585805068474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +97,23 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1228601965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557249585805068356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2ac46ee0a987f4cb4bea833088b071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bridgeBrickCheck: {fileID: 2140401200}
+  maxDistance: 0.5
+  layer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &557249585871592803
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +179,6 @@ Transform:
   - {fileID: 3460438995190525365}
   - {fileID: 13799930151545427}
   - {fileID: 557249585805068357}
-  - {fileID: 557249586781273609}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -208,6 +257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 557249586350183318}
+  charSensor: {fileID: 557249585805068356}
+  charModel: {fileID: 827209163681296617}
 --- !u!1 &557249586781273608
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,12 +282,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557249586781273608}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.51, z: -0.23}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.17000002, z: -0.07666667}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
   m_Children: []
-  m_Father: {fileID: 557249586350183314}
-  m_RootOrder: 3
+  m_Father: {fileID: 13799930151545427}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6351928893930343484
 GameObject:
@@ -385,6 +436,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d86cedf1143f8f44a9727384308720e1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68b19fdccf4b1aa4ab2619cd665aba3a, type: 3}
+--- !u!1 &827209163681296617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 68b19fdccf4b1aa4ab2619cd665aba3a, type: 3}
+  m_PrefabInstance: {fileID: 557249586392387000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &13799930151545427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68b19fdccf4b1aa4ab2619cd665aba3a, type: 3}

@@ -11,10 +11,17 @@ namespace BridgeRace.Core.Character.LogicSystem
         private Vector2 direction = Vector2.zero;
         public override void UpdateData()
         {
+            CollideBridgeBrickHandle();
             RotationHandle();
             MovementHandle();                 
         }
-
+        private void CollideBridgeBrickHandle()
+        {
+            if(Parameter.BridgeBrick != null)
+            {
+                Parameter.BridgeBrick.ChangeColor(Brick.BrickColor.Blue);
+            }
+        }
         private void RotationHandle()
         {
             Vector2 newDirection = new Vector2(Parameter.MoveDirection.x, Parameter.MoveDirection.z);
@@ -22,14 +29,15 @@ namespace BridgeRace.Core.Character.LogicSystem
             {
                 float angle = Vector2.SignedAngle(newDirection, Vector2.up);
                 rotation = Quaternion.Euler(0, angle, 0);
-                Event.SetRotation(rotation);
+                Event.SetRotation(GameConst.SENSOR_ROT,rotation);
+                Event.SetRotation(GameConst.MODEL_ROT,rotation);
             }
         }
         private void MovementHandle()
         {                       
             if (Parameter.IsGrounded && Parameter.Velocity.y < 0)
             {
-                velocity.y = -2f;
+                velocity.y = -1f;
             }
             velocity = Parameter.MoveDirection * Parameter.Speed;
 

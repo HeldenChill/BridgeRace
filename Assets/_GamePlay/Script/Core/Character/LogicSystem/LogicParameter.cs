@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.LogicSystem
 {
+    using BridgeRace.Core.Brick;
     public class LogicParameter : AbstractParameterSystem
     {        
         public float Speed = 4f;
@@ -11,6 +12,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         public Vector3 MoveDirection;
         public bool IsGrounded = false;
         public bool Jump = false;
-        public float JumpVelocity = 10f;   
+        public float JumpVelocity = 10f;
+        public BridgeBrick BridgeBrick;
     }
 }

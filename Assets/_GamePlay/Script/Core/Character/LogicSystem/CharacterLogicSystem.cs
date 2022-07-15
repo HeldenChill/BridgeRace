@@ -20,6 +20,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         public void ReceiveInformation(WorldInterfaceData Data)
         {
             Parameter.IsGrounded = Data.IsGrounded;
+            Parameter.BridgeBrick = Data.BridgeBrick;
         }
 
         public void ReceiveInformation(NavigationData Data)

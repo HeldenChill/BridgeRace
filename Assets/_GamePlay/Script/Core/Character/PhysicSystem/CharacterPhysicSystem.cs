@@ -20,9 +20,9 @@ namespace BridgeRace.Core.Character.PhysicSystem
             module.SetVelocity(velocity);
         }
 
-        public void SetRotation(Quaternion rotation)
+        public void SetRotation(string gameObj,Quaternion rotation)
         {
-            module.SetRotation(rotation);
+            module.SetRotation(gameObj,rotation);
         }
     }
 }

@@ -32,9 +32,16 @@ namespace BridgeRace.Core.Brick
         }
         public virtual void ChangeColor(BrickColor color)
         {
+            if(type == color)
+            {
+                return;
+            }
             type = color;
             Material mat = GameplayManager.Inst.GetMaterial(color);
-            mesh.material = mat;
+            if(mat != null)
+            {
+                mesh.material = mat;
+            }           
         }
     }
 }

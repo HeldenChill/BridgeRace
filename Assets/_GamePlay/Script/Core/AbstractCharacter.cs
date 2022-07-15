@@ -24,9 +24,12 @@ namespace BridgeRace.Core
 
         public BrickColor Type => type;
 
-        protected virtual void OnEnable()
+        private void Start()
         {
             ChangeColor(type);
+        }
+        protected virtual void OnEnable()
+        {            
             BrickCollide.OnCollider += OnCollider;
         }
 
@@ -69,7 +72,7 @@ namespace BridgeRace.Core
 
                 Data.Bricks.Push(brick);
                 Vector3 pos = Vector3.zero;
-                pos.y = (Data.Bricks.Count - 1) * GameConst.BRICK_HEIGHT;
+                pos.y = (Data.Bricks.Count - 1) * GameConst.EAT_BRICK_HEIGHT;
                 brick.gameObject.transform.parent = ContainBrick;
                 brick.gameObject.transform.localPosition = pos;
                 brick.gameObject.transform.localRotation = Quaternion.identity;

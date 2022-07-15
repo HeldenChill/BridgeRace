@@ -5,6 +5,7 @@ namespace BridgeRace.Core.Character.PhysicSystem
 {
     public abstract class AbstractPhysicModule : AbstractModuleSystem<PhysicData,PhysicParameter>
     {
+
         protected PhysicData Data;
         protected PhysicParameter Parameter;
         public override void Initialize(PhysicData Data,PhysicParameter Parameter)
@@ -13,6 +14,7 @@ namespace BridgeRace.Core.Character.PhysicSystem
             this.Parameter = Parameter;
         }
         public abstract void SetVelocity(Vector3 velocity);
-        public abstract void SetRotation(Quaternion rotation);
+        public abstract void SetRotation(string gameObj,Quaternion rotation);
+        
     }
 }

@@ -5,17 +5,35 @@ using UnityEngine;
 namespace BridgeRace.Core.Character.PhysicSystem {
     public class CCPhysicModule : AbstractPhysicModule
     {
-        public CharacterController controller;       
+        public CharacterController controller;
+        [SerializeField]
+        GameObject charSensor;
+        [SerializeField]
+        GameObject charModel;     
         public override void SetVelocity(Vector3 velocity)
         {
             controller.Move(velocity * Time.deltaTime);
             Data.Velocity = velocity;
         }
 
-        public override void SetRotation(Quaternion rotation)
+        public override void SetRotation(string gameObj,Quaternion rotation)
         {
-            gameObject.transform.rotation = rotation;
+            if(gameObj == GameConst.CHARACTER_ROT)
+            {
+                gameObject.transform.rotation = rotation;
+            }
+            else if(gameObj == GameConst.MODEL_ROT)
+            {
+                charModel.transform.rotation = rotation;
+            }
+            else if(gameObj == GameConst.SENSOR_ROT)
+            {
+                charSensor.transform.rotation = rotation;
+            }
+            
         }
+
+
 
         public override void UpdateData()
         {

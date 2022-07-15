@@ -6,6 +6,7 @@ namespace BridgeRace.Manager
 {
     using BridgeRace.Core.Brick;
     using Utilitys;
+    [DefaultExecutionOrder(-1)]
     public class GameplayManager : Singleton<GameplayManager>
     {
         [SerializeField]
