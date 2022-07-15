@@ -12,5 +12,22 @@ namespace BridgeRace.Core
 
         public const float EAT_BRICK_HEIGHT = 0.22f;
         public static readonly Vector3 BRIDGE_BRICK_SIZE = new Vector3(1, 0.3f, 0.5f);
+
+        private static float crossLengthBridgeBrick = 0;
+        public static float CROSS_LENGTH_BRIDGE_BRICK
+        {
+            get
+            {
+                if(crossLengthBridgeBrick < 0.001f)
+                {
+                    crossLengthBridgeBrick = new Vector2(BRIDGE_BRICK_SIZE.y, BRIDGE_BRICK_SIZE.z).magnitude;
+                }
+                return crossLengthBridgeBrick;
+            }
+        }
+
+        public static readonly Quaternion BRIDGE_BRICK_ANGLE = Quaternion.Euler(-(Mathf.Atan(0.3f/0.5f) * Mathf.Rad2Deg), 0, 0);
+
+            
     }
 }

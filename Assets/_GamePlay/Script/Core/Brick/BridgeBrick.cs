@@ -11,10 +11,10 @@ namespace BridgeRace.Core.Brick
         protected override void Start()
         {
             base.Start();
-            if (type == BrickColor.None)
-            {
-                model.SetActive(false);
-            }
+            //if (type == BrickColor.None)
+            //{
+            //    model.SetActive(false);
+            //}
         }
         public override void Interact(AbstractCharacter containBricks)
         {
