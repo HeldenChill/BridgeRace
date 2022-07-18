@@ -238,4 +238,4 @@ MonoBehaviour:
   BridgeBrick: {fileID: 3962681556896035953, guid: ac50dd4e5ce1ef94594679fd0a4a8614, type: 3}
   fence1: {fileID: 6979803229626549130}
   fence2: {fileID: 1536838946166282160}
-  NumOfBrick: 30
+  NumOfBrick: 60

@@ -8,6 +8,8 @@ public class PrefabManager : Singleton<PrefabManager>
     //NOTE:Specific for game,remove to reuse
     public static readonly string BRIDGE_BRICK = "BridgeBrick";
     public static readonly string EAT_BRICK = "EatBrick";
+    public static readonly string BRIDGE = "Bridge";
+    public static readonly string GROUND = "Ground";
 
     private readonly int INITNUMBER_POOL_OBJECT = 50;
 
@@ -18,6 +20,10 @@ public class PrefabManager : Singleton<PrefabManager>
     GameObject BridgeBrick;
     [SerializeField]
     GameObject EatBrick;
+    [SerializeField]
+    GameObject Bridge;
+    [SerializeField]
+    GameObject Ground;
 
     Dictionary<string, Pool> poolData = new Dictionary<string, Pool>();
     protected override void Awake()
@@ -25,6 +31,8 @@ public class PrefabManager : Singleton<PrefabManager>
         base.Awake();
         CreatePool(BridgeBrick, BRIDGE_BRICK, Quaternion.identity, INITNUMBER_POOL_OBJECT);
         CreatePool(EatBrick, EAT_BRICK, Quaternion.identity, INITNUMBER_POOL_OBJECT);
+        CreatePool(Bridge, BRIDGE, Quaternion.identity);
+        CreatePool(Ground, GROUND, Quaternion.identity, 3);
     }
     
 

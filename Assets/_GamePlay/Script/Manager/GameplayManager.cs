@@ -12,7 +12,7 @@ namespace BridgeRace.Manager
         [SerializeField]
         List<Material> BrickMaterial;
         static int numOfPlayer = 4;
-
+        public readonly List<BrickColor> PlayerColors = new List<BrickColor>() {BrickColor.Red, BrickColor.Blue, BrickColor.Yellow , BrickColor.Green };
         public static int NumOfPlayer => numOfPlayer;
 
         public Material GetMaterial(BrickColor color)

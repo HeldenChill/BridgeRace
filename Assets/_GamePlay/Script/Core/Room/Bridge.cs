@@ -18,14 +18,10 @@ namespace BridgeRace.Core
         private const float FENCE_UP = 0.5f;
 
         private float length;
-        private void Start()
-        {
-            length = GameConst.CROSS_LENGTH_BRIDGE_BRICK * NumOfBrick;
-            ConstructBridge();         
-        }
 
         public void ConstructBridge()
         {
+            length = GameConst.CROSS_LENGTH_BRIDGE_BRICK * NumOfBrick;
             //Brick
             Vector3 tempPos = Vector3.zero;
             for(int i = 0; i < NumOfBrick; i++)
