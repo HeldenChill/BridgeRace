@@ -17,12 +17,15 @@ namespace BridgeRace.Core.Character.LogicSystem
             CollideEatBrickHandle();
             RotationHandle();
             if (!disableMovement)
-            {
-                Event.SetVelocity(Vector3.zero);
+            {              
                 MovementHandle();
             }
-                            
+            else
+            {
+                Event.SetVelocity(Vector3.back * 5f);
+            }
         }
+
         private void CollideEatBrickHandle()
         {
             if(Parameter.ContainBrick != null)
@@ -40,16 +43,20 @@ namespace BridgeRace.Core.Character.LogicSystem
         {
             if(Parameter.BridgeBrick != null)
             {
-                if (Parameter.BridgeBrick.Color != BrickColor.Blue)
+                if (Parameter.BridgeBrick.Color != Parameter.CharacterType)
                 {
-                    if (GetBrick() != null)
+                    EatBrick brick = GetBrick();
+                    if(Parameter.MoveDirection.z > 0 && brick == null)
                     {
-                        Parameter.BridgeBrick.ChangeColor(BrickColor.Blue);
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        return false;
+                        if (brick != null)
+                        {
+                            Parameter.BridgeBrick.ChangeColor(Parameter.CharacterType);
+                            return true;
+                        }
                     }
                 }                                                                                        
             }

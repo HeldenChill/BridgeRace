@@ -11,6 +11,10 @@ namespace BridgeRace.Manager
     {
         [SerializeField]
         List<Material> BrickMaterial;
+        static int numOfPlayer = 4;
+
+        public static int NumOfPlayer => numOfPlayer;
+
         public Material GetMaterial(BrickColor color)
         {
             if(color == BrickColor.None)

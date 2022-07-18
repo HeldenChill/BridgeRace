@@ -26,7 +26,7 @@ namespace BridgeRace.Core
             }
         }
 
-        public static readonly Quaternion BRIDGE_BRICK_ANGLE = Quaternion.Euler(-(Mathf.Atan(0.3f/0.5f) * Mathf.Rad2Deg), 0, 0);
+        public static readonly Quaternion BRIDGE_BRICK_ANGLE = Quaternion.Euler(-(Mathf.Atan(BRIDGE_BRICK_SIZE.y/BRIDGE_BRICK_SIZE.z) * Mathf.Rad2Deg), 0, 0);
 
             
     }
