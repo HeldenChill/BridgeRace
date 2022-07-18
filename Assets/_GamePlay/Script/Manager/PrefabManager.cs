@@ -6,8 +6,8 @@ using Utilitys;
 public class PrefabManager : Singleton<PrefabManager>
 {
     //NOTE:Specific for game,remove to reuse
-    public readonly string BRIDGE_BRICK = "BridgeBrick";
-    public readonly string EAT_BRICK = "EatBrick";
+    public static readonly string BRIDGE_BRICK = "BridgeBrick";
+    public static readonly string EAT_BRICK = "EatBrick";
 
     private readonly int INITNUMBER_POOL_OBJECT = 50;
 

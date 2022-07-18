@@ -10,12 +10,18 @@ namespace BridgeRace.Core.Character.LogicSystem
         private Vector3 velocity;
         private Quaternion rotation;
         private Vector2 direction = Vector2.zero;
+        private bool disableMovement = false;
         public override void UpdateData()
         {
-            CollideBridgeBrickHandle();
+            disableMovement = !CollideBridgeBrickHandle();
             CollideEatBrickHandle();
             RotationHandle();
-            MovementHandle();                 
+            if (!disableMovement)
+            {
+                Event.SetVelocity(Vector3.zero);
+                MovementHandle();
+            }
+                            
         }
         private void CollideEatBrickHandle()
         {
@@ -30,12 +36,25 @@ namespace BridgeRace.Core.Character.LogicSystem
                 }
             }
         }
-        private void CollideBridgeBrickHandle()
+        private bool CollideBridgeBrickHandle()
         {
             if(Parameter.BridgeBrick != null)
             {
-                Parameter.BridgeBrick.ChangeColor(Brick.BrickColor.Blue);
+                if (Parameter.BridgeBrick.Color != BrickColor.Blue)
+                {
+                    if (GetBrick() != null)
+                    {
+                        Parameter.BridgeBrick.ChangeColor(BrickColor.Blue);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }                                                                                        
             }
+            return true;
+            
         }
         private void RotationHandle()
         {
@@ -78,6 +97,7 @@ namespace BridgeRace.Core.Character.LogicSystem
             {
                 EatBrick brick = (EatBrick)Data.Bricks.Pop();
                 //TO DO: Push this brick to pool
+                PrefabManager.Inst.PushToPool(brick.gameObject, PrefabManager.EAT_BRICK);
                 return brick;
             }
         }
@@ -97,7 +117,8 @@ namespace BridgeRace.Core.Character.LogicSystem
                 brick.gameObject.transform.parent = Parameter.ContainBrick;
                 brick.gameObject.transform.localPosition = pos;
                 brick.gameObject.transform.localRotation = Quaternion.identity;
-                //Debug.Log(Parameter.EatBricks.Count + ": "+ brick.GetInstanceID());
+
+                //Debug.Log("Character " + Parameter.EatBricks.Count + ": "+ brick.GetInstanceID());
             }
         }
 

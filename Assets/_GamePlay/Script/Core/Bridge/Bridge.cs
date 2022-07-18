@@ -30,7 +30,7 @@ namespace BridgeRace.Core
             Vector3 tempPos = Vector3.zero;
             for(int i = 0; i < NumOfBrick; i++)
             {
-                GameObject brick = PrefabManager.Inst.PopFromPool(PrefabManager.Inst.BRIDGE_BRICK);
+                GameObject brick = PrefabManager.Inst.PopFromPool(PrefabManager.BRIDGE_BRICK);
                 brick.transform.parent = gameObject.transform;
                 brick.transform.localPosition = tempPos;
                 tempPos.y += GameConst.BRIDGE_BRICK_SIZE.y;

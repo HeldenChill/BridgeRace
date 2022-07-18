@@ -15,23 +15,48 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
         private LayerMask layer;
 
         private List<EatBrick> eatBricksList = new List<EatBrick>();
-        private List<EatBrick> oldEatBrick = new List<EatBrick>();
+        private Queue<EatBrick> oldEatBrick = new Queue<EatBrick>();
+
+        int frameActive = 2;
+        int countFrame = 2;
         public override void UpdateData()
         {
-            Collider[] eatBricks = Physics.OverlapBox(EatBrickCheck.position, checkRadious, Quaternion.identity,layer);
+
+            //Collider[] eatBricks = Physics.OverlapBox(EatBrickCheck.position, checkRadious, Quaternion.identity,layer);
+            Collider[] eatBricks = new Collider[4];
+            Physics.OverlapBoxNonAlloc(EatBrickCheck.position, checkRadious, eatBricks, Quaternion.identity, layer);
+            ColliderCheck(eatBricks);
+
+            Data.EatBricks = eatBricksList;
+
+        }
+
+        private void ColliderCheck(Collider[] eatBricks)
+        {
             eatBricksList.Clear();
-            for(int i = 0; i < eatBricks.Length; i++)
+            int oldCount = oldEatBrick.Count;
+            for (int i = 0; i < eatBricks.Length; i++)
             {
+                if (eatBricks[i] == null)
+                    continue;
+
                 EatBrick brick = Cache.GetEatBrick(eatBricks[i]);
                 if (!oldEatBrick.Contains(brick))
                 {
                     eatBricksList.Add(brick);
-                    oldEatBrick.Add(brick);
                 }
-                
+                oldEatBrick.Enqueue(brick);
+                //eatBricksList.Add(brick);
+
             }
-            Data.EatBricks = eatBricksList;
+
+            for (int i = 0; i < oldCount; i++)
+            {
+                oldEatBrick.Dequeue();
+            }
         }
+
+        //NOTE: When check collide by math => collide may be duplicate (Dont know why)
 
         private void OnDrawGizmos()
         {
