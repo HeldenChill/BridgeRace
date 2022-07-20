@@ -12,9 +12,16 @@ namespace BridgeRace.Core
 
         public void Initialize(List<int> playerInstanceID)
         {
+            //NOTE: Construct Room Here
+
             rooms.Add(new AddRoom(Vector3.zero, Vector2.one * 7));
             rooms[0].ConstructRoom();
-            for(int i = 0; i < playerInstanceID.Count; i++)
+            Debug.Log(rooms[0].AddNextRoomPos);
+            Vector3 nextRoomPos = rooms[0].RoomPos + rooms[0].AddNextRoomPos;
+            rooms.Add(new AddRoom(nextRoomPos, Vector2.one * 7));
+            rooms[1].ConstructRoom();
+
+            for (int i = 0; i < playerInstanceID.Count; i++)
             {
                 playerToRoom.Add(playerInstanceID[i], 0);
             }

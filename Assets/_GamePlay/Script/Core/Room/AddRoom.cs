@@ -16,8 +16,13 @@ namespace BridgeRace.Core
         private readonly Vector3 EAT_BRICK_DISTANCE = new Vector3(1, 0, 1);
         private Vector2 roomSize;
         private GameObject ground;
-        private List<Vector3> entrance = new List<Vector3>();
+        private List<Vector3> entrance1 = new List<Vector3>();
+        private List<Vector3> entrance2 = new List<Vector3>();
+        private List<Bridge> bridges = new List<Bridge>();
         private Vector3 roomPos;
+        private Vector3 addNextRoomPos = default;
+
+
         private Dictionary<int, Vector2Int> eatBrickToPos = new Dictionary<int, Vector2Int>();
         private Dictionary<Vector2Int, STimer> posToTimer = new Dictionary<Vector2Int, STimer>();
         private List<Vector2Int> posCanGenerate = new List<Vector2Int>();
@@ -27,6 +32,10 @@ namespace BridgeRace.Core
         private int zCount;
         private float timeGenerate = 3f;
         private int maxNumberColorBrick;
+
+        public Vector3 AddNextRoomPos => addNextRoomPos + new Vector3(0, 0, roomSize.y * 2);
+        public Vector3 RoomPos => roomPos;
+        public Vector2 RoomSize => roomSize;
 
         public AddRoom(Vector3 roomPos,Vector2 roomSize)
         {
@@ -47,16 +56,30 @@ namespace BridgeRace.Core
         {
             Vector2Int pos = eatBrickToPos[instanceID];
             posToTimer[pos].Start(timeGenerate, instanceID);
+            colorCanGenerate.Add(color);
         }
         private void InitializeBridge()
         {
             GetBridgePosition();
-            for(int i = 0; i < entrance.Count; i++)
+            for(int i = 0; i < entrance1.Count; i++)
             {
                 GameObject bridge = PrefabManager.Inst.PopFromPool(PrefabManager.BRIDGE);
                 bridge.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
-                bridge.transform.localPosition = entrance[i];
-                Cache.GetBridge(bridge).ConstructBridge();
+                bridge.transform.localPosition = entrance1[i];
+
+                Bridge bridgeScript = Cache.GetBridge(bridge);
+                bridgeScript.ConstructBridge();
+                bridges.Add(bridgeScript);
+
+                if (addNextRoomPos == default)
+                {
+                    Vector3 temp = GameConst.BRIDGE_BRICK_SIZE;
+                    temp.x = 0;
+                    addNextRoomPos = temp * bridgeScript.NumOfBrick;
+                    Debug.Log(bridgeScript.NumOfBrick);
+                }
+                
+                entrance2.Add(entrance1[i] + addNextRoomPos);
             }
             
         }
@@ -68,7 +91,9 @@ namespace BridgeRace.Core
 
             for(int i = 0; i < GameplayManager.Inst.NumOfPlayer; i++)
             {
-                entrance.Add(new Vector3(roomPos.x + index, roomPos.y, roomPos.z + roomSize.y) + add);
+                Vector3 v = new Vector3(roomPos.x + index, roomPos.y, roomPos.z + roomSize.y) + add;
+                entrance1.Add(v);
+
                 index += value;
             }
         }
@@ -77,13 +102,8 @@ namespace BridgeRace.Core
             InitializeEatBricksData();
             while(colorCanGenerate.Count > 0)
             {
-                int colorIndex = Random.Range(0, colorCanGenerate.Count);
-                int posindex = Random.Range(0, posCanGenerate.Count);
-
-                BrickColor color = colorCanGenerate[colorIndex];
-                Vector2Int pos = posCanGenerate[posindex];
-                colorCanGenerate.Remove(color);
-                posCanGenerate.Remove(pos);
+                BrickColor color = GetBrickColor();
+                Vector2Int pos = GetBrickPosition();
 
                 //NOTE: Create EatBrick
                 GameObject EatBrick = PrefabManager.Inst.PopFromPool(PrefabManager.EAT_BRICK);
@@ -96,13 +116,30 @@ namespace BridgeRace.Core
 
                 Cache.GetEatBrick(EatBrick).ChangeColor(color);
             }
-            
+
         }
+
+        private Vector2Int GetBrickPosition()
+        {
+            int posindex = Random.Range(0, posCanGenerate.Count);
+            Vector2Int pos = posCanGenerate[posindex];
+            posCanGenerate.Remove(pos);
+            return pos;
+        }
+
+        private BrickColor GetBrickColor()
+        {
+            int colorIndex = Random.Range(0, colorCanGenerate.Count);
+            BrickColor color = colorCanGenerate[colorIndex];
+            colorCanGenerate.Remove(color);
+            return color;
+        }
+
         private void InitializeEatBricksData()
         {
             xCount = (int)(roomSize.x * 2 / EAT_BRICK_DISTANCE.x) + 1 - 2 * MARGIN;
             zCount = (int)(roomSize.y * 2 / EAT_BRICK_DISTANCE.z) + 1 - 2 * MARGIN;
-            maxNumberColorBrick = xCount * zCount - GameplayManager.Inst.NumOfPlayer;
+            maxNumberColorBrick = (xCount * zCount) / GameplayManager.Inst.NumOfPlayer;
 
             for(int z = 0; z < zCount; z++)
             {
@@ -146,7 +183,7 @@ namespace BridgeRace.Core
 
             xValue += index.x * EAT_BRICK_DISTANCE.x;
             zValue += index.y * EAT_BRICK_DISTANCE.z;
-            return new Vector3(xValue, EAT_BRICK_HEIGHT, zValue);
+            return new Vector3(roomPos.x + xValue, roomPos.y + EAT_BRICK_HEIGHT,roomPos.z + zValue);
         }
         
         private void UpdateEventTimer(int code)
@@ -156,8 +193,7 @@ namespace BridgeRace.Core
             EatBrick.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
             EatBrick.transform.localPosition = GetEatBrickPosition(pos);
 
-            int index = Random.Range(0, GameplayManager.Inst.PlayerColors.Count);
-            BrickColor color = GameplayManager.Inst.PlayerColors[index];
+            BrickColor color = GetBrickColor();
             Cache.GetEatBrick(EatBrick).ChangeColor(color);
 
             eatBrickToPos.Remove(code);
