@@ -20,10 +20,15 @@ namespace BridgeRace.Core.Character.LogicSystem
             module.Initialize(Data,Parameter,Event);
         }
 
-        public void SetCharacterInformation(BrickColor CharacterType,Transform ContainBrick)
+        public void SetCharacterInformation(Transform ContainBrick,int PlayerInstanceID)
+        {
+            
+            Parameter.ContainBrick = ContainBrick;
+            Parameter.PlayerInstanceID = PlayerInstanceID;
+        }
+        public void SetCharacterInformation(BrickColor CharacterType)
         {
             Parameter.CharacterType = CharacterType;
-            Parameter.ContainBrick = ContainBrick;
         }
         public void ReceiveInformation(WorldInterfaceData Data)
         {

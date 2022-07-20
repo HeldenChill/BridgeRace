@@ -4,17 +4,39 @@ using UnityEngine;
 
 namespace BridgeRace.Manager
 {
+    using BridgeRace.Core;
     using BridgeRace.Core.Brick;
     using Utilitys;
     [DefaultExecutionOrder(-1)]
     public class GameplayManager : Singleton<GameplayManager>
     {
-        [SerializeField]
-        List<Material> BrickMaterial;
-        static int numOfPlayer = 4;
-        public readonly List<BrickColor> PlayerColors = new List<BrickColor>() {BrickColor.Red, BrickColor.Blue, BrickColor.Yellow , BrickColor.Green };
-        public static int NumOfPlayer => numOfPlayer;
+        public readonly List<BrickColor> PLAYER_COLOR = new List<BrickColor>() { BrickColor.Blue, BrickColor.Yellow, BrickColor.Green, BrickColor.Red, };
 
+
+        [SerializeField]
+        private List<Material> BrickMaterial;       
+        [SerializeField]
+        private List<GameObject> players;
+        private List<int> playerInstanceID = new List<int>();
+        [HideInInspector]
+        public List<BrickColor> PlayerColors = new List<BrickColor>();
+        public int NumOfPlayer => players.Count;
+
+        private void Start()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                playerInstanceID.Add(players[i].GetInstanceID());
+                BrickColor color = PLAYER_COLOR[i];
+                players[i].GetComponent<AbstractCharacter>().ChangeColor(color);
+                PlayerColors.Add(color);
+            }
+            LevelManager.Inst.SetPlayers(playerInstanceID);
+        }
         public Material GetMaterial(BrickColor color)
         {
             if(color == BrickColor.None)

@@ -9,6 +9,7 @@ namespace BridgeRace.Core.Character.LogicSystem
     {
         public BrickColor CharacterType;
         public Transform ContainBrick;
+        public int PlayerInstanceID;
 
         public float Speed = 4f;
         public Vector3 Velocity;

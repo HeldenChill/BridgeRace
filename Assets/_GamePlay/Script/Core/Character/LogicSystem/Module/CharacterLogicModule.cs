@@ -4,6 +4,7 @@ using UnityEngine;
 namespace BridgeRace.Core.Character.LogicSystem
 {
     using BridgeRace.Core.Brick;
+    using BridgeRace.Manager;
     using Utilitys;
     public class CharacterLogicModule : AbstractLogicModule
     {
@@ -125,6 +126,8 @@ namespace BridgeRace.Core.Character.LogicSystem
                 brick.gameObject.transform.localPosition = pos;
                 brick.gameObject.transform.localRotation = Quaternion.identity;
 
+                AddRoom room = LevelManager.Inst.CurrentLevel.GetCurrentRoom(Parameter.PlayerInstanceID);
+                room.AteEatBrick(brick.gameObject.GetInstanceID(), brick.Color);
                 //Debug.Log("Character " + Parameter.EatBricks.Count + ": "+ brick.GetInstanceID());
             }
         }

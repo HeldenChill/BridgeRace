@@ -8,7 +8,7 @@ using BridgeRace.Core.Character.NavigationSystem;
 using BridgeRace.Core.Character.WorldInterfaceSystem;
 using BridgeRace.Core.Data;
 using BridgeRace.Core;
-
+using BridgeRace.Core.Brick;
 
 public class PlayerController : AbstractCharacter
 {
@@ -37,7 +37,7 @@ public class PlayerController : AbstractCharacter
         LogicSystem = new CharacterLogicSystem(LogicModule);
         PhysicSystem = new CharacterPhysicSystem(PhysicModule);
 
-        LogicSystem.SetCharacterInformation(type, ContainBrick);
+        LogicSystem.SetCharacterInformation(ContainBrick,gameObject.GetInstanceID());
     }
 
     protected override void OnEnable()
@@ -75,5 +75,11 @@ public class PlayerController : AbstractCharacter
         NavigationSystem.Run();
         LogicSystem.Run();
         PhysicSystem.Run();
+    }
+
+    public override void ChangeColor(BrickColor color)
+    {
+        base.ChangeColor(color);
+        LogicSystem.SetCharacterInformation(color);
     }
 }
