@@ -36,6 +36,7 @@ namespace BridgeRace.Core
         public Vector3 AddNextRoomPos => addNextRoomPos + Vector3.forward * roomSize.y;
         public Vector3 RoomPos => roomPos;
         public Vector2 RoomSize => roomSize;
+        public List<Vector3> Entrance1 => entrance1;
 
         public AddRoom(Vector3 roomPos,Vector2 roomSize)
         {
@@ -67,6 +68,7 @@ namespace BridgeRace.Core
                 GameObject bridge = PrefabManager.Inst.PopFromPool(PrefabManager.BRIDGE);
                 bridge.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
                 bridge.transform.localPosition = entrance1[i];
+                entrance1[i] = bridge.transform.position + Vector3.back;
 
                 Bridge bridgeScript = Cache.GetBridge(bridge);
                 bridgeScript.ConstructBridge();

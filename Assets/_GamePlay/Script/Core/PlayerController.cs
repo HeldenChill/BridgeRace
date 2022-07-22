@@ -20,8 +20,8 @@ public class PlayerController : AbstractCharacter
     [SerializeField]
     AbstractLogicModule LogicModule;
     [SerializeField]
-    AbstractPhysicModule PhysicModule;  
-
+    AbstractPhysicModule PhysicModule;
+    CharacterData Data;
     
     
 
@@ -32,13 +32,18 @@ public class PlayerController : AbstractCharacter
     
     private void Awake()
     {
+        Data = ScriptableObject.CreateInstance(typeof(CharacterData)) as CharacterData;
         WorldInterfaceSystem = new CharacterWorldInterfaceSystem(WorldInterfaceModule);
         NavigationSystem = new CharacterNavigationSystem(NavigationModule);
         LogicSystem = new CharacterLogicSystem(LogicModule);
         PhysicSystem = new CharacterPhysicSystem(PhysicModule);
 
         LogicSystem.SetCharacterInformation(ContainBrick,gameObject.GetInstanceID());
-        NavigationSystem.SetCharacterInformation(gameObject.transform);
+        LogicSystem.SetCharacterData(Data);
+        NavigationSystem.SetCharacterInformation(gameObject.transform,gameObject.GetInstanceID());
+        NavigationSystem.SetCharacterData(Data);
+
+        
     }
 
     protected override void OnEnable()
@@ -53,6 +58,7 @@ public class PlayerController : AbstractCharacter
 
         LogicSystem.Event.SetVelocity += PhysicSystem.SetVelocity;
         LogicSystem.Event.SetRotation += PhysicSystem.SetRotation;
+        LogicSystem.Event.SetSmoothRotation += PhysicSystem.SetSmoothRotation;
         #endregion
     }
 
@@ -67,6 +73,8 @@ public class PlayerController : AbstractCharacter
         PhysicSystem.OnUpdateData -= LogicSystem.ReceiveInformation;
 
         LogicSystem.Event.SetVelocity -= PhysicSystem.SetVelocity;
+        LogicSystem.Event.SetRotation -= PhysicSystem.SetRotation;
+        LogicSystem.Event.SetSmoothRotation -= PhysicSystem.SetSmoothRotation;
         #endregion
     }
 
@@ -82,5 +90,6 @@ public class PlayerController : AbstractCharacter
     {
         base.ChangeColor(color);
         LogicSystem.SetCharacterInformation(color);
+        NavigationSystem.SetCharacterInformation(color);
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BridgeRace.Core.Character.NavigationSystem
 {
+    using BridgeRace.Core.Brick;
+    using BridgeRace.Core.Data;
     using WorldInterfaceSystem;
     public class CharacterNavigationSystem : AbstractCharacterSystem<AbstractNavigationModule,NavigationData,NavigationParameter>
     {
@@ -20,9 +22,21 @@ namespace BridgeRace.Core.Character.NavigationSystem
             Parameter.EatBricks = Data.VisionEatBricks;
         }
 
-        public void SetCharacterInformation(Transform Player)
+        public void SetCharacterInformation(Transform Player, int PlayerInstanceID)
         {
             Parameter.Player = Player;
+            Parameter.PlayerInstanceID = PlayerInstanceID;
+        }
+
+        public void SetCharacterInformation(BrickColor CharacterType)
+        {
+            Parameter.CharacterType = CharacterType;
+        }
+
+
+        public void SetCharacterData(CharacterData CharacterData)
+        {
+            Parameter.CharacterData = CharacterData;
         }
     }
 }

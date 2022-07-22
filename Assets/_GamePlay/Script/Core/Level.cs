@@ -35,7 +35,7 @@ namespace BridgeRace.Core
 
             for (int i = 0; i < playerInstanceID.Count; i++)
             {
-                playerToRoom.Add(playerInstanceID[i], -1);
+                playerToRoom.Add(playerInstanceID[i], -1);             
             }
         }
 

@@ -8,5 +8,6 @@ namespace BridgeRace.Core.Character.LogicSystem
     {
         public Action<Vector3> SetVelocity;
         public Action<string,Quaternion> SetRotation;
+        public Action<string, Vector3> SetSmoothRotation;
     }
 }

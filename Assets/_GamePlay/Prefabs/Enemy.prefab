@@ -140,7 +140,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 128
-  checkRadious: {x: 4, y: 0.05, z: 4}
+  checkRadious: {x: 3, y: 0.1, z: 3}
 --- !u!1 &9186961397654366228
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +254,7 @@ MonoBehaviour:
   controller: {fileID: 9186961397654366239}
   charSensor: {fileID: 8042318123945091778}
   charModel: {fileID: 3183834785441184722}
+  rotateSpeed: 0.1
 --- !u!1001 &6533320842085864936
 PrefabInstance:
   m_ObjectHideFlags: 0

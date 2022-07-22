@@ -218,10 +218,33 @@ namespace Utilitys
             return value;
         }
 
+        public static bool GetRandomPercent(float percent)
+        {
+            if(percent <= 0)
+            {
+                return false;
+            }
+            else if(percent >= 100)
+            {
+                return true;
+            }
+            else
+            {
+                float value = Random.Range(0, 100);
+                if(value <= percent)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public static bool IsApproximately(Vector2 v1,Vector2 v2)
         {
             Vector2 value = v1 - v2;
-            if(value.sqrMagnitude < 0.001f)
+            if(value.sqrMagnitude < 0.01f)
             {
                 return true;
             }

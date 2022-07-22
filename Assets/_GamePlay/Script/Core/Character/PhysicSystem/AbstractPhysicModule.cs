@@ -15,6 +15,6 @@ namespace BridgeRace.Core.Character.PhysicSystem
         }
         public abstract void SetVelocity(Vector3 velocity);
         public abstract void SetRotation(string gameObj,Quaternion rotation);
-        
+        public abstract void SetSmoothRotation(string gameObj, Vector3 direction);
     }
 }

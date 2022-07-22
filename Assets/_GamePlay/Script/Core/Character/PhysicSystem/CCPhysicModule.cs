@@ -9,7 +9,12 @@ namespace BridgeRace.Core.Character.PhysicSystem {
         [SerializeField]
         GameObject charSensor;
         [SerializeField]
-        GameObject charModel;     
+        GameObject charModel;
+
+        [SerializeField]
+        float rotateSpeed = 0.1f;
+
+        Quaternion rotGoal;
         public override void SetVelocity(Vector3 velocity)
         {
             controller.Move(velocity * Time.deltaTime);
@@ -32,6 +37,27 @@ namespace BridgeRace.Core.Character.PhysicSystem {
             }
             
         }
+
+        public override void SetSmoothRotation(string gameObj, Vector3 direction)
+        {
+            if (gameObj == GameConst.CHARACTER_ROT)
+            {
+                rotGoal = Quaternion.LookRotation(direction);
+                gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, rotGoal, rotateSpeed);
+            }
+            else if (gameObj == GameConst.MODEL_ROT)
+            {
+                rotGoal = Quaternion.LookRotation(direction);
+                charModel.transform.rotation = Quaternion.Slerp(charModel.transform.rotation, rotGoal, rotateSpeed);
+            }
+            else if (gameObj == GameConst.SENSOR_ROT)
+            {
+                rotGoal = Quaternion.LookRotation(direction);
+                charSensor.transform.rotation = Quaternion.Slerp(charSensor.transform.rotation, rotGoal, rotateSpeed);
+            }
+
+        }
+
 
 
 

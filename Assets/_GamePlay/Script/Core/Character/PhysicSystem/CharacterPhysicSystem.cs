@@ -24,5 +24,10 @@ namespace BridgeRace.Core.Character.PhysicSystem
         {
             module.SetRotation(gameObj,rotation);
         }
+
+        public void SetSmoothRotation(string gameObj, Vector3 direction)
+        {
+            module.SetSmoothRotation(gameObj, direction);
+        }
     }
 }

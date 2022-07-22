@@ -16,9 +16,6 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
 
         private List<EatBrick> eatBricksList = new List<EatBrick>();
         private Queue<EatBrick> oldEatBrick = new Queue<EatBrick>();
-
-        int frameActive = 2;
-        int countFrame = 2;
         public override void UpdateData()
         {
 

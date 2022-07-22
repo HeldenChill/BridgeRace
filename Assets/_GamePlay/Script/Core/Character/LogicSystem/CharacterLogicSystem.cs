@@ -7,6 +7,7 @@ namespace BridgeRace.Core.Character.LogicSystem
     using NavigationSystem;
     using PhysicSystem;
     using BridgeRace.Core.Brick;
+    using BridgeRace.Core.Data;
 
     public class CharacterLogicSystem : AbstractCharacterSystem<AbstractLogicModule,LogicData,LogicParameter>
     {
@@ -21,14 +22,17 @@ namespace BridgeRace.Core.Character.LogicSystem
         }
 
         public void SetCharacterInformation(Transform ContainBrick,int PlayerInstanceID)
-        {
-            
+        {           
             Parameter.ContainBrick = ContainBrick;
             Parameter.PlayerInstanceID = PlayerInstanceID;
         }
         public void SetCharacterInformation(BrickColor CharacterType)
         {
             Parameter.CharacterType = CharacterType;
+        }
+        public void SetCharacterData(CharacterData CharacterData)
+        {
+            Data.CharacterData = CharacterData;
         }
         public void ReceiveInformation(WorldInterfaceData Data)
         {

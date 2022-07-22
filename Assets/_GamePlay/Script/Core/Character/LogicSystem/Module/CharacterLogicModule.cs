@@ -12,6 +12,8 @@ namespace BridgeRace.Core.Character.LogicSystem
         private Quaternion rotation;
         private Vector2 direction = Vector2.zero;
         private bool disableMovement = false;
+
+        
         public override void UpdateData()
         {
             CheckExitRoom();
@@ -72,15 +74,17 @@ namespace BridgeRace.Core.Character.LogicSystem
             return true;
             
         }
+
         private void RotationHandle()
         {
             Vector2 newDirection = new Vector2(Parameter.MoveDirection.x, Parameter.MoveDirection.z);
             if (!MathHelper.IsApproximately(newDirection, direction) && newDirection.sqrMagnitude > 0.001f)
             {
-                float angle = Vector2.SignedAngle(newDirection, Vector2.up);
+                float angle = Mathf.Atan2(newDirection.x, newDirection.y) * Mathf.Rad2Deg;
+                    //Vector2.SignedAngle(newDirection, Vector2.up);              
                 rotation = Quaternion.Euler(0, angle, 0);
-                Event.SetRotation(GameConst.SENSOR_ROT,rotation);
-                Event.SetRotation(GameConst.MODEL_ROT,rotation);
+                Event.SetSmoothRotation(GameConst.SENSOR_ROT,Parameter.MoveDirection);
+                Event.SetSmoothRotation(GameConst.MODEL_ROT,Parameter.MoveDirection);
             }
         }
         private void MovementHandle()
@@ -105,13 +109,13 @@ namespace BridgeRace.Core.Character.LogicSystem
 
         public EatBrick GetBrick()
         {
-            if (Data.Bricks.Count == 0)
+            if (Data.CharacterData.Bricks.Count == 0)
             {
                 return null;
             }
             else
             {
-                EatBrick brick = (EatBrick)Data.Bricks.Pop();
+                EatBrick brick = (EatBrick)Data.CharacterData.Bricks.Pop();
                 //TO DO: Push this brick to pool
                 PrefabManager.Inst.PushToPool(brick.gameObject, PrefabManager.EAT_BRICK);
                 return brick;
@@ -127,9 +131,9 @@ namespace BridgeRace.Core.Character.LogicSystem
                     brick.ChangeColor(Parameter.CharacterType);
                 }
 
-                Data.Bricks.Push(brick);
+                Data.CharacterData.Bricks.Push(brick);
                 Vector3 pos = Vector3.zero;
-                pos.y = (Data.Bricks.Count - 1) * GameConst.EAT_BRICK_HEIGHT;
+                pos.y = (Data.CharacterData.Bricks.Count - 1) * GameConst.EAT_BRICK_HEIGHT;
                 brick.gameObject.transform.parent = Parameter.ContainBrick;
                 brick.gameObject.transform.localPosition = pos;
                 brick.gameObject.transform.localRotation = Quaternion.identity;
