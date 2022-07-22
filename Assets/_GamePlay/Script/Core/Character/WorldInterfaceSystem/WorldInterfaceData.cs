@@ -8,9 +8,12 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
     using Utilitys;
     public class WorldInterfaceData : AbstractDataSystem<WorldInterfaceData>
     {
-        private List<EatBrick> eatBrickClone = new List<EatBrick>();
+        private List<EatBrick> eatBrickClone = new List<EatBrick>(); //TODO: Need to change
+        private List<EatBrick> visionEatBrickClone = new List<EatBrick>(); //TODO: Need to change
 
-        public List<EatBrick> EatBricks;      
+        public List<EatBrick> VisionEatBricks;
+
+        public List<EatBrick> EatBricks;        
         public BridgeBrick BridgeBrick;
         public bool IsGrounded = false;
         public bool IsExitRoom = false;
@@ -36,6 +39,17 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
                 }
             }
             Clone.EatBricks = eatBrickClone;
+
+            if (VisionEatBricks != null)
+            {
+                visionEatBrickClone.Clear();
+                for(int i = 0; i < VisionEatBricks.Count; i++)
+                {
+                    visionEatBrickClone.Add(VisionEatBricks[i]);
+                }
+            }
+
+            Clone.VisionEatBricks = visionEatBrickClone;
             Clone.CurrentRoomID = CurrentRoomID;
         }
     }

@@ -17,6 +17,12 @@ namespace BridgeRace.Core.Character.NavigationSystem
         public void ReceiveInformation(WorldInterfaceData Data)
         {
             Parameter.IsGrounded = Data.IsGrounded;
+            Parameter.EatBricks = Data.VisionEatBricks;
+        }
+
+        public void SetCharacterInformation(Transform Player)
+        {
+            Parameter.Player = Player;
         }
     }
 }

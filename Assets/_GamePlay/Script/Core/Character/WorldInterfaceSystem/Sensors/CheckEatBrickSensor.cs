@@ -8,7 +8,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
     public class CheckEatBrickSensor : BaseSensor
     {
         [SerializeField]
-        private Transform EatBrickCheck;
+        private Transform eatBrickCheck;
         [SerializeField]
         private Vector3 checkRadious;
         [SerializeField]
@@ -24,7 +24,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
 
             //Collider[] eatBricks = Physics.OverlapBox(EatBrickCheck.position, checkRadious, Quaternion.identity,layer);
             Collider[] eatBricks = new Collider[4];
-            Physics.OverlapBoxNonAlloc(EatBrickCheck.position, checkRadious, eatBricks, Quaternion.identity, layer);
+            Physics.OverlapBoxNonAlloc(eatBrickCheck.position, checkRadious, eatBricks, Quaternion.identity, layer);
             ColliderCheck(eatBricks);
 
             Data.EatBricks = eatBricksList;
@@ -60,9 +60,9 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
 
         private void OnDrawGizmos()
         {
-            if (EatBrickCheck != null)
+            if (eatBrickCheck != null)
             {
-                Gizmos.DrawCube(EatBrickCheck.position, checkRadious * 2);
+                Gizmos.DrawCube(eatBrickCheck.position, checkRadious * 2);
             }
         }
     }

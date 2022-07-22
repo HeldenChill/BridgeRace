@@ -38,6 +38,7 @@ public class PlayerController : AbstractCharacter
         PhysicSystem = new CharacterPhysicSystem(PhysicModule);
 
         LogicSystem.SetCharacterInformation(ContainBrick,gameObject.GetInstanceID());
+        NavigationSystem.SetCharacterInformation(gameObject.transform);
     }
 
     protected override void OnEnable()
