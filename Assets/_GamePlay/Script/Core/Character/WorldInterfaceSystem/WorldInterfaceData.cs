@@ -10,9 +10,11 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
     {
         private List<EatBrick> eatBrickClone = new List<EatBrick>();
 
-        public List<EatBrick> EatBricks;
+        public List<EatBrick> EatBricks;      
+        public BridgeBrick BridgeBrick;
         public bool IsGrounded = false;
-        public BridgeBrick BridgeBrick;     
+        public bool IsExitRoom = false;
+        public int CurrentRoomID = 0;
 
         protected override void UpdateDataClone()
         {
@@ -21,6 +23,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
                 Clone = CreateInstance(typeof(WorldInterfaceData)) as WorldInterfaceData;
             }
             Clone.IsGrounded = IsGrounded;
+            Clone.IsExitRoom = IsExitRoom;
             Clone.BridgeBrick = BridgeBrick;
 
             //NOTE: Clone list EatBricks
@@ -33,7 +36,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
                 }
             }
             Clone.EatBricks = eatBrickClone;
-            
+            Clone.CurrentRoomID = CurrentRoomID;
         }
     }
 }

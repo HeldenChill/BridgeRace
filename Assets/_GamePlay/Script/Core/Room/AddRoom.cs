@@ -13,7 +13,7 @@ namespace BridgeRace.Core
         private const int MARGIN = 2;
         private const float SIZE_Y_ROOM = 1f;
         private readonly float EAT_BRICK_HEIGHT = SIZE_Y_ROOM / 2 + GameConst.EAT_BRICK_HEIGHT / 2;
-        private readonly Vector3 EAT_BRICK_DISTANCE = new Vector3(1, 0, 1);
+        private readonly Vector3 EAT_BRICK_DISTANCE = new Vector3(1.25f, 0, 1.25f);
         private Vector2 roomSize;
         private GameObject ground;
         private List<Vector3> entrance1 = new List<Vector3>();
@@ -33,7 +33,7 @@ namespace BridgeRace.Core
         private float timeGenerate = 3f;
         private int maxNumberColorBrick;
 
-        public Vector3 AddNextRoomPos => addNextRoomPos + new Vector3(0, 0, roomSize.y * 2);
+        public Vector3 AddNextRoomPos => addNextRoomPos + Vector3.forward * roomSize.y;
         public Vector3 RoomPos => roomPos;
         public Vector2 RoomSize => roomSize;
 
@@ -55,7 +55,8 @@ namespace BridgeRace.Core
         public void AteEatBrick(int instanceID, BrickColor color)
         {
             Vector2Int pos = eatBrickToPos[instanceID];
-            posToTimer[pos].Start(timeGenerate, instanceID);
+            eatBrickToPos.Remove(instanceID);
+            posToTimer[pos].Start(timeGenerate, pos);
             colorCanGenerate.Add(color);
         }
         private void InitializeBridge()
@@ -76,7 +77,6 @@ namespace BridgeRace.Core
                     Vector3 temp = GameConst.BRIDGE_BRICK_SIZE;
                     temp.x = 0;
                     addNextRoomPos = temp * bridgeScript.NumOfBrick;
-                    Debug.Log(bridgeScript.NumOfBrick);
                 }
                 
                 entrance2.Add(entrance1[i] + addNextRoomPos);
@@ -149,7 +149,7 @@ namespace BridgeRace.Core
                     Vector2Int pos = new Vector2Int(x, z);
                     posCanGenerate.Add(pos);
                     STimer timer = new STimer();
-                    timer.TimeOut1 += UpdateEventTimer;
+                    timer.TimeOutVector2Int += UpdateEventTimer;
                     posToTimer.Add(pos, timer);
                   
                 }   
@@ -186,9 +186,8 @@ namespace BridgeRace.Core
             return new Vector3(roomPos.x + xValue, roomPos.y + EAT_BRICK_HEIGHT,roomPos.z + zValue);
         }
         
-        private void UpdateEventTimer(int code)
+        private void UpdateEventTimer(Vector2Int pos)
         {
-            Vector2Int pos = eatBrickToPos[code];
             GameObject EatBrick = PrefabManager.Inst.PopFromPool(PrefabManager.EAT_BRICK);
             EatBrick.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
             EatBrick.transform.localPosition = GetEatBrickPosition(pos);
@@ -196,7 +195,7 @@ namespace BridgeRace.Core
             BrickColor color = GetBrickColor();
             Cache.GetEatBrick(EatBrick).ChangeColor(color);
 
-            eatBrickToPos.Remove(code);
+            
             eatBrickToPos.Add(EatBrick.GetInstanceID(), pos);
             
         }
@@ -205,7 +204,7 @@ namespace BridgeRace.Core
         {
             foreach(var timer in posToTimer)
             {
-                timer.Value.TimeOut1 -= UpdateEventTimer;
+                timer.Value.TimeOutVector2Int -= UpdateEventTimer;
                 MotherTimer.Inst.Push(timer.Value);
             }
         }

@@ -11,7 +11,7 @@ namespace Utilitys.Timer
         public event Action FrameUpdate;
         public event Action<int> TimeOut1;
         public event Action<Type, int> TimeOut2;
-        public event Action<Vector3> TimeOutVector3;
+        public event Action<Vector2Int> TimeOutVector2Int;
         #endregion
         #region Property
         private bool isStart = false;
@@ -19,7 +19,7 @@ namespace Utilitys.Timer
         private int timeFrame = 0;
         private int code = -1;
         private Type type = null;
-        private Vector3 vector3;
+        private Vector2Int vector2Int;
 
         public float TimeRemaining
         {
@@ -37,9 +37,9 @@ namespace Utilitys.Timer
         {
             MotherTimer.Inst.TimerUpdate.AddListener(Update);
         }
-        public void Start(float time,Vector3 code)
+        public void Start(float time,Vector2Int code)
         {
-            vector3 = code;
+            vector2Int = code;
             Start(time);
         }
 
@@ -85,7 +85,7 @@ namespace Utilitys.Timer
         {
             TimeOut1?.Invoke(code);
             TimeOut2?.Invoke(type, code);
-            TimeOutVector3?.Invoke(vector3);
+            TimeOutVector2Int?.Invoke(vector2Int);
         }
         public void Update()
         {

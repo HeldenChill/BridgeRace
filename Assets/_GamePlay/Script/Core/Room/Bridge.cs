@@ -7,8 +7,6 @@ namespace BridgeRace.Core
     public class Bridge : MonoBehaviour
     {
         [SerializeField]
-        protected GameObject BridgeBrick;
-        [SerializeField]
         GameObject fence1;
         [SerializeField]
         GameObject fence2;
@@ -39,6 +37,7 @@ namespace BridgeRace.Core
 
             fence1.transform.localPosition = fence1.transform.forward * (length / 2 - 0.2f) + FENCE_HORIZONTAL + fence1.transform.up * FENCE_UP;
             fence2.transform.localPosition = fence2.transform.forward * (length / 2 - 0.2f) + -FENCE_HORIZONTAL + fence2.transform.up * FENCE_UP;
+
         }
     }
 }

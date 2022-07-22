@@ -14,6 +14,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         private bool disableMovement = false;
         public override void UpdateData()
         {
+            CheckExitRoom();
             disableMovement = !CollideBridgeBrickHandle();
             CollideEatBrickHandle();
             RotationHandle();
@@ -26,7 +27,14 @@ namespace BridgeRace.Core.Character.LogicSystem
                 Event.SetVelocity(Vector3.back * 5f);
             }
         }
-
+        private void CheckExitRoom()
+        {
+            if (Parameter.IsExitRoom)
+            {
+                LevelManager.Inst.CurrentLevel.NextPlayerRoom(Parameter.PlayerInstanceID);
+            }
+            //TODO: Need To Set Player Room(Player can back to previous room)
+        }
         private void CollideEatBrickHandle()
         {
             if(Parameter.ContainBrick != null)

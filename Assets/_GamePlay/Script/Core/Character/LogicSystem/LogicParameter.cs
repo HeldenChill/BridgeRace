@@ -19,5 +19,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         public float JumpVelocity = 10f;
         public BridgeBrick BridgeBrick;
         public List<EatBrick> EatBricks;
+
+        public bool IsExitRoom = false;
     }
 }

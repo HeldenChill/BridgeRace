@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9151155387310028810}
   - component: {fileID: 429002363140220222}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Fence2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 9199204471732068663}
   - component: {fileID: 6154534803152262117}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Fence1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcfaf31c498020418deb7ec12af511f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BridgeBrick: {fileID: 3962681556896035953, guid: ac50dd4e5ce1ef94594679fd0a4a8614, type: 3}
   fence1: {fileID: 6979803229626549130}
   fence2: {fileID: 1536838946166282160}
-  NumOfBrick: 60
+  NumOfBrick: 30

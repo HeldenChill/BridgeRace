@@ -35,6 +35,7 @@ namespace BridgeRace.Core.Character.LogicSystem
             Parameter.IsGrounded = Data.IsGrounded;
             Parameter.BridgeBrick = Data.BridgeBrick;
             Parameter.EatBricks = Data.EatBricks;
+            Parameter.IsExitRoom = Data.IsExitRoom;
         }
 
         public void ReceiveInformation(NavigationData Data)
