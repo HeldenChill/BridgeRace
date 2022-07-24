@@ -37,6 +37,7 @@ namespace BridgeRace.Core
         public Vector3 RoomPos => roomPos;
         public Vector2 RoomSize => roomSize;
         public List<Vector3> Entrance1 => entrance1;
+        public List<Vector3> Entrance2 => entrance2;
 
         public AddRoom(Vector3 roomPos,Vector2 roomSize)
         {
@@ -81,7 +82,7 @@ namespace BridgeRace.Core
                     addNextRoomPos = temp * bridgeScript.NumOfBrick;
                 }
                 
-                entrance2.Add(entrance1[i] + addNextRoomPos);
+                entrance2.Add(entrance1[i] + addNextRoomPos + Vector3.forward);
             }
             
         }
