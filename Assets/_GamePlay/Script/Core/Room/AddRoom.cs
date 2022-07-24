@@ -140,8 +140,8 @@ namespace BridgeRace.Core
 
         private void InitializeEatBricksData()
         {
-            xCount = (int)(roomSize.x * 2 / EAT_BRICK_DISTANCE.x) + 1 - 2 * MARGIN;
-            zCount = (int)(roomSize.y * 2 / EAT_BRICK_DISTANCE.z) + 1 - 2 * MARGIN;
+            xCount = Mathf.RoundToInt(roomSize.x * 2 / EAT_BRICK_DISTANCE.x) + 1 - 2 * MARGIN;
+            zCount = Mathf.RoundToInt(roomSize.y * 2 / EAT_BRICK_DISTANCE.z) + 1 - 2 * MARGIN;
             maxNumberColorBrick = (xCount * zCount) / GameplayManager.Inst.NumOfPlayer;
 
             for(int z = 0; z < zCount; z++)
