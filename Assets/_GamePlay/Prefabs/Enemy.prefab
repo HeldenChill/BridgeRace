@@ -221,13 +221,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
+  m_Height: 0.8
   m_Radius: 0.02
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.38, z: 0}
 --- !u!114 &9186961397654366237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,9 +285,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 9186961397654366239}
   charSensor: {fileID: 8042318123945091778}
-  charModel: {fileID: 3183834785441184722}
+  charModel: {fileID: 8133555534771686750}
   detectCollisions: 0
-  rotateSpeed: 0.1
+  rotateSpeed: 10
 --- !u!1001 &6533320842085864936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -578,21 +578,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2795169625904955809}
     m_Modifications:
+    - target: {fileID: 1721007092, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
+      propertyPath: radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721007092, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
+      propertyPath: parentCollider
+      value: 
+      objectReference: {fileID: 9186961397654366239}
     - target: {fileID: 4798495627368198223, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: eatBrickCheck
       value: 
       objectReference: {fileID: 1986384008796724771}
     - target: {fileID: 5191400267062498669, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: sensors.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498669, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: sensors.Array.data[4]
       value: 
+      objectReference: {fileID: 7216121028004828596}
+    - target: {fileID: 5191400267062498669, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
+      propertyPath: sensors.Array.data[5]
+      value: 
       objectReference: {fileID: 1052823926066856097}
     - target: {fileID: 5191400267062498706, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_Name
-      value: Sensor
+      value: BaseCharacterSensor
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_RootOrder
@@ -640,11 +652,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
---- !u!1 &3183834785441184722 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5191400267062498706, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
-  m_PrefabInstance: {fileID: 7216121028582321728}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3183834785441184723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
@@ -655,7 +662,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5191400267062498669, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
   m_PrefabInstance: {fileID: 7216121028582321728}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183834785441184722}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f27542ec963ff94bafc0d54a67e9845, type: 3}
@@ -666,3 +673,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9202475185049464931, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
   m_PrefabInstance: {fileID: 7216121028582321728}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7216121028004828596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1721007092, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
+  m_PrefabInstance: {fileID: 7216121028582321728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a5e8686c207c54e9c216cba3f04a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

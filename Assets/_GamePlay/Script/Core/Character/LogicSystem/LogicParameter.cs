@@ -12,6 +12,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         public int PlayerInstanceID;
 
         public float Speed = 4f;
+        public float TimeFall = 3f;
 
         public Vector3 Velocity;
         public Vector3 MoveDirection;

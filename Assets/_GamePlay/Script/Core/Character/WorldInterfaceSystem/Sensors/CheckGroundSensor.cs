@@ -12,6 +12,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
         public override void UpdateData()
         {
             Data.IsGrounded = Physics.CheckSphere(groundCheck.position, distance, layer);
+            //Debug.Log("WorldInterface: " + Data.IsGrounded);
         }
 
         private void OnDrawGizmos()

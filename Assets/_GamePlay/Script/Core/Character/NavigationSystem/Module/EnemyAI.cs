@@ -131,16 +131,16 @@ namespace BridgeRace.Core.Character.NavigationSystem
                     if (goToEntrance2)
                     {
                         isOnBridge = false;                       
-                        Debug.Log("Go To Entrance2");
+                        //Debug.Log("Go To Entrance2");
                     }
                     else if (goToEntrance1)
                     {
-                        Debug.Log("Go To Entrance1");      
+                        //Debug.Log("Go To Entrance1");      
                         isOnBridge = true;
                     }
                     else if (goToBrick)
                     {
-                        Debug.Log("Go To Brick");
+                        //Debug.Log("Go To Brick");
                     }
                     ReachDestination();
                 }

@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 557249586350183313}
   - component: {fileID: 557249586350183312}
   - component: {fileID: 557249586350183315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,8 +78,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.8201787
-  m_Radius: 0.1819151
+  m_Height: 1
+  m_Radius: 0.02
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -144,7 +144,7 @@ MonoBehaviour:
   charSensor: {fileID: 6118804073380053083}
   charModel: {fileID: 1682400700206029131}
   detectCollisions: 0
-  rotateSpeed: 0.05
+  rotateSpeed: 10
 --- !u!1 &1682400700206029131
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,9 +184,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 557249586350183314}
     m_Modifications:
+    - target: {fileID: 1721007092, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
+      propertyPath: parentCollider
+      value: 
+      objectReference: {fileID: 557249586350183318}
     - target: {fileID: 5191400267062498706, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_Name
-      value: Sensor
+      value: BaseCharacterSensor
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_RootOrder

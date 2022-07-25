@@ -53,10 +53,5 @@ namespace BridgeRace.Core.Character.LogicSystem
         {
             Parameter.Velocity = Data.Velocity;
         }
-
-        public void Fall() //TODO: Temp,need to convert to combat system // TEST
-        {
-            ((CharacterLogicModule)module).Fall();
-        }
     }
 }

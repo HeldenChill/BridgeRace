@@ -27,6 +27,7 @@ namespace BridgeRace.Core
         private Dictionary<Vector2Int, STimer> posToTimer = new Dictionary<Vector2Int, STimer>();
         private List<Vector2Int> posCanGenerate = new List<Vector2Int>();
         private List<BrickColor> colorCanGenerate = new List<BrickColor>();
+        private List<int> oldPlayerInstanceID = new List<int>();
 
         private int xCount;
         private int zCount;
@@ -54,14 +55,55 @@ namespace BridgeRace.Core
             ground.transform.localPosition = roomPos;
             ground.transform.localScale = new Vector3(roomSize.x * 2, SIZE_Y_ROOM, roomSize.y * 2);
             InitializeBridge();
-            InitializeEatBricks();
+            InitializeEatBricksData();
+        }
+        public int GetGroundInstancedID() => ground.GetInstanceID();
+        public void AddColorAndBrick(int playerInstanceID, BrickColor color)
+        {
+            if (oldPlayerInstanceID.Contains(playerInstanceID))
+                return;
+            if(oldPlayerInstanceID.Count < GameplayManager.Inst.NumOfPlayer)
+            {
+                for (int i = 0; i < maxNumberColorBrick; i++)
+                {
+                    colorCanGenerate.Add(color);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < xCount * zCount - maxNumberColorBrick * (oldPlayerInstanceID.Count - 1); i++)
+                {
+                    colorCanGenerate.Add(color);
+                }
+            }
+
+            while (colorCanGenerate.Count > 0)
+            {
+                BrickColor colorIndex = GetBrickColor();
+                Vector2Int pos = GetBrickPosition();
+
+                //NOTE: Create EatBrick
+                GameObject EatBrick = PrefabManager.Inst.PopFromPool(PrefabManager.EAT_BRICK);
+                EatBrick.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
+                EatBrick.transform.localPosition = GetEatBrickPosition(pos);
+
+                eatBrickToPos.Add(EatBrick.GetInstanceID(), pos);
+
+                //NOTE: Change Color depends on player color
+
+                Cache.GetEatBrick(EatBrick).ChangeColor(colorIndex);
+            }
+
         }
         public void AteEatBrick(int instanceID, BrickColor color)
         {
-            Vector2Int pos = eatBrickToPos[instanceID];
-            eatBrickToPos.Remove(instanceID);
-            posToTimer[pos].Start(timeGenerate, pos);
-            colorCanGenerate.Add(color);
+            if (eatBrickToPos.ContainsKey(instanceID))
+            {
+                Vector2Int pos = eatBrickToPos[instanceID];
+                eatBrickToPos.Remove(instanceID);
+                posToTimer[pos].Start(timeGenerate, pos);
+                colorCanGenerate.Add(color);
+            }            
         }
         private void InitializeBridge()
         {
@@ -106,27 +148,10 @@ namespace BridgeRace.Core
                 index += value;
             }
         }
-        private void InitializeEatBricks()
-        {
-            InitializeEatBricksData();
-            while(colorCanGenerate.Count > 0)
-            {
-                BrickColor color = GetBrickColor();
-                Vector2Int pos = GetBrickPosition();
-
-                //NOTE: Create EatBrick
-                GameObject EatBrick = PrefabManager.Inst.PopFromPool(PrefabManager.EAT_BRICK);
-                EatBrick.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
-                EatBrick.transform.localPosition = GetEatBrickPosition(pos);
-
-                eatBrickToPos.Add(EatBrick.GetInstanceID(), pos);
-
-                //NOTE: Change Color depends on player color
-
-                Cache.GetEatBrick(EatBrick).ChangeColor(color);
-            }
-
-        }
+        //private void InitializeEatBricks()
+        //{
+        //    InitializeEatBricksData();            
+        //}
 
         private Vector2Int GetBrickPosition()
         {
@@ -163,26 +188,26 @@ namespace BridgeRace.Core
                   
                 }   
             }
-            for(int i = 0; i < GameplayManager.Inst.PlayerColors.Count; i++)
-            {
-                if(i == GameplayManager.Inst.PlayerColors.Count - 1)
-                {
-                    for (int j = 0; j < xCount * zCount - maxNumberColorBrick * i; j++)
-                    {
-                        BrickColor color = GameplayManager.Inst.PlayerColors[i];
-                        colorCanGenerate.Add(color);
-                    }
-                }
-                else
-                {
-                    for (int j = 0; j < maxNumberColorBrick; j++)
-                    {
-                        BrickColor color = GameplayManager.Inst.PlayerColors[i];
-                        colorCanGenerate.Add(color);
-                    }
-                }
+            //for(int i = 0; i < GameplayManager.Inst.PlayerColors.Count; i++)
+            //{
+            //    if(i == GameplayManager.Inst.PlayerColors.Count - 1)
+            //    {
+            //        for (int j = 0; j < xCount * zCount - maxNumberColorBrick * i; j++)
+            //        {
+            //            BrickColor color = GameplayManager.Inst.PlayerColors[i];
+            //            colorCanGenerate.Add(color);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        for (int j = 0; j < maxNumberColorBrick; j++)
+            //        {
+            //            BrickColor color = GameplayManager.Inst.PlayerColors[i];
+            //            colorCanGenerate.Add(color);
+            //        }
+            //    }
                 
-            }
+            //}
             
         }
         private Vector3 GetEatBrickPosition(Vector2Int index)
@@ -203,10 +228,8 @@ namespace BridgeRace.Core
 
             BrickColor color = GetBrickColor();
             Cache.GetEatBrick(EatBrick).ChangeColor(color);
-
             
-            eatBrickToPos.Add(EatBrick.GetInstanceID(), pos);
-            
+            eatBrickToPos.Add(EatBrick.GetInstanceID(), pos);           
         }
 
         ~AddRoom()

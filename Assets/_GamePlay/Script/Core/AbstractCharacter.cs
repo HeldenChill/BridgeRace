@@ -59,11 +59,5 @@ namespace BridgeRace.Core
             //TODO: Return num of brick
             return Data.Bricks.Count;
         }
-
-        internal void Fall()
-        {
-            //TODO: Call Fall in logic module
-            LogicSystem.Fall();
-        }
     }
 }

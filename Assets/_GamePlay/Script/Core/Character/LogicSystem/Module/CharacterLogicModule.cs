@@ -5,19 +5,27 @@ namespace BridgeRace.Core.Character.LogicSystem
 {
     using BridgeRace.Core.Brick;
     using BridgeRace.Manager;
-    using System;
     using Utilitys;
+    using Utilitys.Timer;
     public class CharacterLogicModule : AbstractLogicModule
     {
         private Vector3 velocity;
         private Quaternion rotation;
         private Vector2 direction = Vector2.zero;
         private bool disableMovement = false;
+        private bool isFall = false;
+        STimer fallTimer = new STimer();
 
-        
+        private void OnEnable()
+        {
+            fallTimer.TimeOut1 += TimerUpdate;
+        }
         public override void UpdateData()
         {
-            CheckPlayer();
+            if (isFall)
+                return;
+
+            CheckPlayer();            
             CheckExitRoom();
             disableMovement = !CollideBridgeBrickHandle();
             CollideEatBrickHandle();
@@ -33,25 +41,37 @@ namespace BridgeRace.Core.Character.LogicSystem
         }
         public void CheckPlayer()
         {
-            if(Parameter.Characters != null)
+
+            if (!Parameter.IsGrounded)
             {
-                for(int i = 0; i < Parameter.Characters.Count; i++)
+                return;
+            }
+
+            if (Parameter.Characters != null)
+            {               
+                for (int i = 0; i < Parameter.Characters.Count; i++)
                 {
                     int numOfBrick = Parameter.Characters[i].CharacterCollide();
-                    if(numOfBrick >= Data.CharacterData.Bricks.Count)
+                    if(numOfBrick > Data.CharacterData.Bricks.Count)
                     {
                         Fall();
-                    }
-                    else
-                    {
-                        Parameter.Characters[i].Fall();
                     }
                 }
             }
         }
 
-        public void Fall()
+        private void Fall()
         {
+            isFall = true;
+            fallTimer.Start(Parameter.TimeFall, 0);
+            while(Data.CharacterData.Bricks.Count > 0)
+            {
+                EatBrick brick = Data.CharacterData.Bricks.Pop();
+                brick.ChangeColor(BrickColor.Gray);
+                brick.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
+                brick.BrickFall();
+            }
+            Debug.Log("FALL");
             //TODO: Fall Here
         }
 
@@ -59,9 +79,10 @@ namespace BridgeRace.Core.Character.LogicSystem
         {
             if (Parameter.IsExitRoom)
             {
-                LevelManager.Inst.CurrentLevel.NextPlayerRoom(Parameter.PlayerInstanceID);
+                LevelManager.Inst.CurrentLevel.SetPlayerRoom(Parameter.PlayerInstanceID,Parameter.ContainBrick.position.y);
+                AddRoom room = LevelManager.Inst.CurrentLevel.GetCurrentRoom(Parameter.PlayerInstanceID);               
+                room?.AddColorAndBrick(Parameter.PlayerInstanceID, Parameter.CharacterType);
             }
-            //TODO: Need To Set Player Room(Player can back to previous room)
         }
         private void CollideEatBrickHandle()
         {
@@ -125,6 +146,10 @@ namespace BridgeRace.Core.Character.LogicSystem
             {
                 velocity.y = Parameter.JumpVelocity;
             }
+            else if(Parameter.IsGrounded)
+            {
+                velocity.y = -0.5f;
+            }
             else
             {
                 velocity.y = Parameter.Velocity.y;
@@ -141,8 +166,9 @@ namespace BridgeRace.Core.Character.LogicSystem
             }
             else
             {
-                EatBrick brick = (EatBrick)Data.CharacterData.Bricks.Pop();
+                EatBrick brick = Data.CharacterData.Bricks.Pop();
                 //TO DO: Push this brick to pool
+                brick.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                 PrefabManager.Inst.PushToPool(brick.gameObject, PrefabManager.EAT_BRICK);
                 return brick;
             }
@@ -157,12 +183,17 @@ namespace BridgeRace.Core.Character.LogicSystem
                     brick.ChangeColor(Parameter.CharacterType);
                 }
 
+                //if (Data.CharacterData.Bricks.Contains(brick))
+                //    return;
+
                 Data.CharacterData.Bricks.Push(brick);
                 Vector3 pos = Vector3.zero;
                 pos.y = (Data.CharacterData.Bricks.Count - 1) * GameConst.EAT_BRICK_HEIGHT;
+                brick.SetActivePhysic(false);
                 brick.gameObject.transform.parent = Parameter.ContainBrick;
                 brick.gameObject.transform.localPosition = pos;
-                brick.gameObject.transform.localRotation = Quaternion.identity;
+                brick.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                
 
                 AddRoom room = LevelManager.Inst.CurrentLevel.GetCurrentRoom(Parameter.PlayerInstanceID);
                 room.AteEatBrick(brick.gameObject.GetInstanceID(), brick.Color);
@@ -170,6 +201,18 @@ namespace BridgeRace.Core.Character.LogicSystem
             }
         }
         
+        private void TimerUpdate(int code)
+        {
+            if(code == 0)
+            {
+                isFall = false;
+            }
+        }
+
+        private void OnDisable()
+        {
+            fallTimer.TimeOut1 -= TimerUpdate;
+        }
 
     }
 }

@@ -43,7 +43,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
                 {
                     AbstractCharacter character = Cache.GetCharacter(characters[i]);
                     charactersList.Add(character);
-                    Debug.Log(characters[i].gameObject.name);
+                    //Debug.Log("WorldInterface: " + characters[i].gameObject.name);
                 }
                 oldCharacters.Enqueue(characters[i]);                               
             }

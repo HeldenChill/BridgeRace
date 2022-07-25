@@ -10,6 +10,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
     {
         private List<EatBrick> eatBrickClone = new List<EatBrick>(); //TODO: Need to change
         private List<EatBrick> visionEatBrickClone = new List<EatBrick>(); //TODO: Need to change
+        private List<AbstractCharacter> charactersClone = new List<AbstractCharacter>(); //TODO: Need to change
 
         public List<EatBrick> VisionEatBricks;
 
@@ -39,8 +40,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
                     eatBrickClone.Add(EatBricks[i]);
                 }
             }
-            Clone.EatBricks = eatBrickClone;
-
+            
             if (VisionEatBricks != null)
             {
                 visionEatBrickClone.Clear();
@@ -50,6 +50,17 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
                 }
             }
 
+            if(Characters != null)
+            {
+                charactersClone.Clear();
+                for(int i = 0; i < Characters.Count; i++)
+                {
+                    charactersClone.Add(Characters[i]);
+                }
+            }
+
+            Clone.Characters = charactersClone;
+            Clone.EatBricks = eatBrickClone;
             Clone.VisionEatBricks = visionEatBrickClone;
             Clone.CurrentRoomID = CurrentRoomID;
         }

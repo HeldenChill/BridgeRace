@@ -16,7 +16,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
         private LayerMask layer;
 
         private List<EatBrick> eatBricksList = new List<EatBrick>();
-        private Queue<EatBrick> oldEatBrick = new Queue<EatBrick>();
+        private Queue<Collider> oldEatBrick = new Queue<Collider>();
         private Collider[] eatBricksTemp = new Collider[4];
         public override void UpdateData()
         {
@@ -37,15 +37,12 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
             {
                 if (eatBricks[i] == null)
                     continue;
-
-                EatBrick brick = Cache.GetEatBrick(eatBricks[i]);
-
-                if (!oldEatBrick.Contains(brick))
+                if (!oldEatBrick.Contains(eatBricks[i]))
                 {
+                    EatBrick brick = Cache.GetEatBrick(eatBricks[i]);
                     eatBricksList.Add(brick);
                 }
-                oldEatBrick.Enqueue(brick);
-
+                oldEatBrick.Enqueue(eatBricks[i]);
             }
 
             for (int i = 0; i < oldCount; i++)
