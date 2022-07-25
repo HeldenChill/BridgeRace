@@ -5,6 +5,7 @@ namespace BridgeRace.Core.Character.LogicSystem
 {
     using BridgeRace.Core.Brick;
     using BridgeRace.Manager;
+    using System;
     using Utilitys;
     public class CharacterLogicModule : AbstractLogicModule
     {
@@ -16,6 +17,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         
         public override void UpdateData()
         {
+            CheckPlayer();
             CheckExitRoom();
             disableMovement = !CollideBridgeBrickHandle();
             CollideEatBrickHandle();
@@ -29,6 +31,30 @@ namespace BridgeRace.Core.Character.LogicSystem
                 Event.SetVelocity(Vector3.back * 5f);
             }
         }
+        public void CheckPlayer()
+        {
+            if(Parameter.Characters != null)
+            {
+                for(int i = 0; i < Parameter.Characters.Count; i++)
+                {
+                    int numOfBrick = Parameter.Characters[i].CharacterCollide();
+                    if(numOfBrick >= Data.CharacterData.Bricks.Count)
+                    {
+                        Fall();
+                    }
+                    else
+                    {
+                        Parameter.Characters[i].Fall();
+                    }
+                }
+            }
+        }
+
+        public void Fall()
+        {
+            //TODO: Fall Here
+        }
+
         private void CheckExitRoom()
         {
             if (Parameter.IsExitRoom)
@@ -143,6 +169,7 @@ namespace BridgeRace.Core.Character.LogicSystem
                 //Debug.Log("Character " + Parameter.EatBricks.Count + ": "+ brick.GetInstanceID());
             }
         }
+        
 
     }
 }

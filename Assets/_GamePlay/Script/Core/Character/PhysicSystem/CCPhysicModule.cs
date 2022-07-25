@@ -13,7 +13,7 @@ namespace BridgeRace.Core.Character.PhysicSystem {
         [SerializeField]
         bool detectCollisions;
         [SerializeField]
-        float rotateSpeed = 0.1f;
+        float rotateSpeed = 10f;
 
         Quaternion rotGoal;
         private void Start()
@@ -48,17 +48,17 @@ namespace BridgeRace.Core.Character.PhysicSystem {
             if (gameObj == GameConst.CHARACTER_ROT)
             {
                 rotGoal = Quaternion.LookRotation(direction);
-                gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, rotGoal, rotateSpeed);
+                gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, rotGoal, rotateSpeed * Time.deltaTime);
             }
             else if (gameObj == GameConst.MODEL_ROT)
             {
                 rotGoal = Quaternion.LookRotation(direction);
-                charModel.transform.rotation = Quaternion.Slerp(charModel.transform.rotation, rotGoal, rotateSpeed);
+                charModel.transform.rotation = Quaternion.Slerp(charModel.transform.rotation, rotGoal, rotateSpeed * Time.deltaTime);
             }
             else if (gameObj == GameConst.SENSOR_ROT)
             {
                 rotGoal = Quaternion.LookRotation(direction);
-                charSensor.transform.rotation = Quaternion.Slerp(charSensor.transform.rotation, rotGoal, rotateSpeed);
+                charSensor.transform.rotation = Quaternion.Slerp(charSensor.transform.rotation, rotGoal, rotateSpeed * Time.deltaTime);
             }
 
         }

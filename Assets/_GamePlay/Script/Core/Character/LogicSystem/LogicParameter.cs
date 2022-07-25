@@ -22,6 +22,7 @@ namespace BridgeRace.Core.Character.LogicSystem
 
         public BridgeBrick BridgeBrick;
         public List<EatBrick> EatBricks;
+        public List<AbstractCharacter> Characters;
 
         public bool IsExitRoom = false;
 

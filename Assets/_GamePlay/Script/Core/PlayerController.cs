@@ -21,15 +21,7 @@ public class PlayerController : AbstractCharacter
     AbstractLogicModule LogicModule;
     [SerializeField]
     AbstractPhysicModule PhysicModule;
-    CharacterData Data;
-    
-    
-
-    private CharacterWorldInterfaceSystem WorldInterfaceSystem;
-    private CharacterNavigationSystem NavigationSystem;
-    private CharacterLogicSystem LogicSystem;
-    private CharacterPhysicSystem PhysicSystem;
-    
+                 
     private void Awake()
     {
         Data = ScriptableObject.CreateInstance(typeof(CharacterData)) as CharacterData;

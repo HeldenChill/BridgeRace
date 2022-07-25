@@ -30,7 +30,7 @@ namespace BridgeRace.Core
             rooms.Add(new AddRoom(nextRoomPos2, roomSize3, 1));
             rooms[2].ConstructRoom();
 
-            Vector3 nextRoomPos3 = rooms[2].RoomPos + rooms[2].AddNextRoomPos + Vector3.down * 3 + Vector3.forward;
+            Vector3 nextRoomPos3 = rooms[2].RoomPos + rooms[2].AddNextRoomPos + Vector3.down * 3 + Vector3.forward * 0.5f;
             Destination.transform.localPosition = nextRoomPos3;
 
             for (int i = 0; i < playerInstanceID.Count; i++)

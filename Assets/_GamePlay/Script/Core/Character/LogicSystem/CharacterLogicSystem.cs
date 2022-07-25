@@ -40,6 +40,7 @@ namespace BridgeRace.Core.Character.LogicSystem
             Parameter.BridgeBrick = Data.BridgeBrick;
             Parameter.EatBricks = Data.EatBricks;
             Parameter.IsExitRoom = Data.IsExitRoom;
+            Parameter.Characters = Data.Characters;
         }
 
         public void ReceiveInformation(NavigationData Data)
@@ -51,6 +52,11 @@ namespace BridgeRace.Core.Character.LogicSystem
         public void ReceiveInformation(PhysicData Data)
         {
             Parameter.Velocity = Data.Velocity;
+        }
+
+        public void Fall() //TODO: Temp,need to convert to combat system // TEST
+        {
+            ((CharacterLogicModule)module).Fall();
         }
     }
 }

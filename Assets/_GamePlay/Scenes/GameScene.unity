@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5820203}
   m_LocalRotation: {x: -0, y: 0.000000028578135, z: -0.000000022862508, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0000004768371, y: -1.5140315e-10, z: -1.8925458e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1839062335}
@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9186961397654366234, guid: f18b6c3c4067fd04ab4dcab64727339b, type: 3}
+      propertyPath: rotateSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9186961397654366235, guid: f18b6c3c4067fd04ab4dcab64727339b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -735,6 +739,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9186961397654366234, guid: f18b6c3c4067fd04ab4dcab64727339b, type: 3}
+      propertyPath: rotateSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9186961397654366235, guid: f18b6c3c4067fd04ab4dcab64727339b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -863,8 +871,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.48404622, y: 0.0002457725, z: -0.000042053078, w: 0.87504244}
-  m_LocalPosition: {x: 6.4002686, y: 21.47122, z: -12.757021}
+  m_LocalRotation: {x: 0.48404622, y: 0.00025053238, z: -0.000042868, w: 0.87504244}
+  m_LocalPosition: {x: 6.4001927, y: 21.47122, z: -12.757021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5820204}
@@ -1047,6 +1055,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 557249586350183315, guid: ec7e2235fe00e8140a98b172032686dc, type: 3}
+      propertyPath: rotateSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 557249586350183318, guid: ec7e2235fe00e8140a98b172032686dc, type: 3}
       propertyPath: m_Height
       value: 1
@@ -1096,6 +1108,10 @@ PrefabInstance:
       propertyPath: charModel
       value: 
       objectReference: {fileID: 649302203}
+    - target: {fileID: 9186961397654366234, guid: f18b6c3c4067fd04ab4dcab64727339b, type: 3}
+      propertyPath: rotateSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9186961397654366235, guid: f18b6c3c4067fd04ab4dcab64727339b, type: 3}
       propertyPath: m_RootOrder
       value: 3
