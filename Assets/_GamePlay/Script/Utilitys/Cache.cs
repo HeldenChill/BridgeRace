@@ -11,6 +11,8 @@ public static class Cache
     private static Dictionary<Collider, EatBrick> collider2EatBricks = new Dictionary<Collider, EatBrick>();
     private static Dictionary<GameObject, EatBrick> gameobject2EatBricks = new Dictionary<GameObject, EatBrick>();
     private static Dictionary<GameObject, Bridge> gameobject2Bridges = new Dictionary<GameObject, Bridge>();
+
+    private static Dictionary<Collider, AbstractCharacter> collider2Character = new Dictionary<Collider, AbstractCharacter>();
     public static BridgeBrick GetBridgeBrick(Collider col)
     {
         if (!collider2BridgeBricks.ContainsKey(col))
@@ -42,6 +44,7 @@ public static class Cache
         return collider2EatBricks[col];
     }
 
+
     public static Bridge GetBridge(GameObject obj)
     {
         if (!gameobject2Bridges.ContainsKey(obj))
@@ -49,5 +52,14 @@ public static class Cache
             gameobject2Bridges.Add(obj, obj.GetComponent<Bridge>());
         }
         return gameobject2Bridges[obj];
+    }
+
+    public static AbstractCharacter GetCharacter(Collider col)
+    {
+        if (!collider2Character.ContainsKey(col))
+        {
+            collider2Character.Add(col, col.gameObject.GetComponent<AbstractCharacter>());
+        }
+        return collider2Character[col];
     }
 }

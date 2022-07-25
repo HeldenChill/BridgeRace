@@ -141,8 +141,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 557249586350183318}
-  charSensor: {fileID: 1682400700206029131}
-  charModel: {fileID: 6118804073380053083}
+  charSensor: {fileID: 6118804073380053083}
+  charModel: {fileID: 1682400700206029131}
+  detectCollisions: 0
+  rotateSpeed: 0.05
 --- !u!1 &1682400700206029131
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,10 +184,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 557249586350183314}
     m_Modifications:
-    - target: {fileID: 4316129512823006772, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498706, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_Name
       value: Sensor
@@ -233,26 +231,6 @@ PrefabInstance:
     - target: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5742142860010217434, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5742142860010217434, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5742142861113911054, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5742142861113911054, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5742142861539161062, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.458
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}

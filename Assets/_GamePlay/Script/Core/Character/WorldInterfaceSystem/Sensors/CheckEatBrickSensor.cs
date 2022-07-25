@@ -1,4 +1,5 @@
 using BridgeRace.Core.Brick;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,14 +17,14 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
 
         private List<EatBrick> eatBricksList = new List<EatBrick>();
         private Queue<EatBrick> oldEatBrick = new Queue<EatBrick>();
+        private Collider[] eatBricksTemp = new Collider[4];
         public override void UpdateData()
         {
 
             //Collider[] eatBricks = Physics.OverlapBox(EatBrickCheck.position, checkRadious, Quaternion.identity,layer);
-            Collider[] eatBricks = new Collider[4];
-            Physics.OverlapBoxNonAlloc(eatBrickCheck.position, checkRadious, eatBricks, Quaternion.identity, layer);
-            ColliderCheck(eatBricks);
-
+            Array.Clear(eatBricksTemp, 0, eatBricksTemp.Length);
+            Physics.OverlapBoxNonAlloc(eatBrickCheck.position, checkRadious, eatBricksTemp, Quaternion.identity, layer);
+            ColliderCheck(eatBricksTemp);
             Data.EatBricks = eatBricksList;
 
         }
@@ -38,12 +39,12 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
                     continue;
 
                 EatBrick brick = Cache.GetEatBrick(eatBricks[i]);
+
                 if (!oldEatBrick.Contains(brick))
                 {
                     eatBricksList.Add(brick);
                 }
                 oldEatBrick.Enqueue(brick);
-                //eatBricksList.Add(brick);
 
             }
 

@@ -10,11 +10,16 @@ namespace BridgeRace.Core.Character.PhysicSystem {
         GameObject charSensor;
         [SerializeField]
         GameObject charModel;
-
+        [SerializeField]
+        bool detectCollisions;
         [SerializeField]
         float rotateSpeed = 0.1f;
 
         Quaternion rotGoal;
+        private void Start()
+        {
+            controller.detectCollisions = detectCollisions;
+        }
         public override void SetVelocity(Vector3 velocity)
         {
             controller.Move(velocity * Time.deltaTime);

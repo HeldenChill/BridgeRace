@@ -6,11 +6,11 @@ namespace Utilitys
 {
     public class CheckCollide : MonoBehaviour
     {
-        public event Action<Collider> OnCollider;
+        public event Action<Collider> OnColliderEnter;
         private void OnTriggerEnter(Collider other)
         {
 
-            OnCollider?.Invoke(other);
+            OnColliderEnter?.Invoke(other);
         }
     }
 }

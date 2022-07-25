@@ -27,7 +27,7 @@ namespace BridgeRace.Core
             rooms[1].ConstructRoom();
 
             Vector3 nextRoomPos2 = rooms[1].RoomPos + rooms[1].AddNextRoomPos + Vector3.forward * roomSize3.y;
-            rooms.Add(new AddRoom(nextRoomPos2, roomSize3));
+            rooms.Add(new AddRoom(nextRoomPos2, roomSize3, 1));
             rooms[2].ConstructRoom();
 
             Vector3 nextRoomPos3 = rooms[2].RoomPos + rooms[2].AddNextRoomPos + Vector3.down * 3 + Vector3.forward;
@@ -41,7 +41,7 @@ namespace BridgeRace.Core
 
         public void SetPlayerRoom(int playerInstanceID,int level)
         {
-            playerToRoom[playerInstanceID] += level;
+            playerToRoom[playerInstanceID] = level;
         }
         public void NextPlayerRoom(int playerInstanceID)
         {
@@ -49,6 +49,7 @@ namespace BridgeRace.Core
             if(playerToRoom[playerInstanceID] >= rooms.Count)
             {
                 //TODO: GameWin
+                Debug.Log("Game Win");
             }
         }
 

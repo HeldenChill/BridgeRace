@@ -32,6 +32,7 @@ namespace BridgeRace.Core
         private int zCount;
         private float timeGenerate = 3f;
         private int maxNumberColorBrick;
+        private int numOfBridge;
 
         public Vector3 AddNextRoomPos => addNextRoomPos + Vector3.forward * roomSize.y;
         public Vector3 RoomPos => roomPos;
@@ -39,10 +40,11 @@ namespace BridgeRace.Core
         public List<Vector3> Entrance1 => entrance1;
         public List<Vector3> Entrance2 => entrance2;
 
-        public AddRoom(Vector3 roomPos,Vector2 roomSize)
+        public AddRoom(Vector3 roomPos,Vector2 roomSize, int numOfBridge = -1)
         {
             this.roomPos = roomPos;
-            this.roomSize = roomSize;     
+            this.roomSize = roomSize;
+            this.numOfBridge = numOfBridge;
         }
 
         public void ConstructRoom()
@@ -88,11 +90,15 @@ namespace BridgeRace.Core
         }
         private void GetBridgePosition()
         {
+            if(numOfBridge == -1)
+            {
+                numOfBridge = GameplayManager.Inst.NumOfPlayer;
+            }
             Vector3 add = new Vector3(0, (SIZE_Y_ROOM - GameConst.BRIDGE_BRICK_SIZE.y) / 2, GameConst.BRIDGE_BRICK_SIZE.z / 2);
-            float value = roomSize.x * 2/ (GameplayManager.Inst.NumOfPlayer + 1);
+            float value = roomSize.x * 2/ (numOfBridge + 1);
             float index = -roomSize.x + value;
 
-            for(int i = 0; i < GameplayManager.Inst.NumOfPlayer; i++)
+            for(int i = 0; i < numOfBridge; i++)
             {
                 Vector3 v = new Vector3(roomPos.x + index, roomPos.y, roomPos.z + roomSize.y) + add;
                 entrance1.Add(v);

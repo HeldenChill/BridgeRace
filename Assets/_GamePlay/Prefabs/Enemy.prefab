@@ -62,6 +62,38 @@ Transform:
   m_Father: {fileID: 9186961397654366235}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8133555534771686750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2795169625904955809}
+  m_Layer: 8
+  m_Name: EnemySensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2795169625904955809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133555534771686750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4317002595535476211}
+  - {fileID: 3183834785441184723}
+  m_Father: {fileID: 9186961397654366235}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8702391802157041681
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,13 +148,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8850179646756028488}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2195178036744585368}
-  m_Father: {fileID: 3183834785441184723}
-  m_RootOrder: 4
+  m_Father: {fileID: 2795169625904955809}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1052823926066856097
 MonoBehaviour:
@@ -174,7 +206,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7080879210454189593}
-  - {fileID: 3183834785441184723}
+  - {fileID: 2795169625904955809}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -189,13 +221,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.8201787
-  m_Radius: 0.1819151
+  m_Height: 1
+  m_Radius: 0.02
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0.01053675, y: 0.3831246, z: 0.05982718}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &9186961397654366237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +286,7 @@ MonoBehaviour:
   controller: {fileID: 9186961397654366239}
   charSensor: {fileID: 8042318123945091778}
   charModel: {fileID: 3183834785441184722}
+  detectCollisions: 0
   rotateSpeed: 0.1
 --- !u!1001 &6533320842085864936
 PrefabInstance:
@@ -543,7 +576,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 9186961397654366235}
+    m_TransformParent: {fileID: 2795169625904955809}
     m_Modifications:
     - target: {fileID: 4798495627368198223, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: eatBrickCheck
@@ -583,15 +616,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498707, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

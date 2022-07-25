@@ -13,7 +13,8 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
 
         public List<EatBrick> VisionEatBricks;
 
-        public List<EatBrick> EatBricks;        
+        public List<EatBrick> EatBricks;
+        public List<AbstractCharacter> Characters;
         public BridgeBrick BridgeBrick;
         public bool IsGrounded = false;
         public bool IsExitRoom = false;
