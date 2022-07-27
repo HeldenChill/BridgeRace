@@ -21,8 +21,9 @@ namespace BridgeRace.Core.Character.LogicSystem
             module.Initialize(Data,Parameter,Event);
         }
 
-        public void SetCharacterInformation(Transform ContainBrick,int PlayerInstanceID)
-        {           
+        public void SetCharacterInformation(Transform ContainBrick,Transform SensorTF,int PlayerInstanceID)
+        {
+            Parameter.SensorTF = SensorTF;
             Parameter.ContainBrick = ContainBrick;
             Parameter.PlayerInstanceID = PlayerInstanceID;
         }
@@ -36,6 +37,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         }
         public void ReceiveInformation(WorldInterfaceData Data)
         {
+            Parameter.IsHaveGround = Data.IsHaveGround;
             Parameter.IsGrounded = Data.IsGrounded;
             Parameter.BridgeBrick = Data.BridgeBrick;
             Parameter.EatBricks = Data.EatBricks;

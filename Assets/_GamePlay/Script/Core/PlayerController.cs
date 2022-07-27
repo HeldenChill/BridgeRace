@@ -31,7 +31,7 @@ public class PlayerController : AbstractCharacter
         LogicSystem = new CharacterLogicSystem(LogicModule);
         PhysicSystem = new CharacterPhysicSystem(PhysicModule);
 
-        LogicSystem.SetCharacterInformation(ContainBrick,gameObject.GetInstanceID());
+        LogicSystem.SetCharacterInformation(ContainBrick,SensorTF,gameObject.GetInstanceID());
         LogicSystem.SetCharacterData(Data);
         NavigationSystem.SetCharacterInformation(gameObject.transform,gameObject.GetInstanceID());
         NavigationSystem.SetCharacterData(Data);

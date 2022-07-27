@@ -8,6 +8,7 @@ namespace BridgeRace.Core.Character.LogicSystem
     public class LogicParameter : AbstractParameterSystem
     {
         public BrickColor CharacterType;
+        public Transform SensorTF;
         public Transform ContainBrick;
         public int PlayerInstanceID;
 
@@ -17,6 +18,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         public Vector3 Velocity;
         public Vector3 MoveDirection;
 
+        public bool IsHaveGround = false;
         public bool IsGrounded = false;
         public bool Jump = false;
         public float JumpVelocity = 10f;
@@ -27,5 +29,6 @@ namespace BridgeRace.Core.Character.LogicSystem
 
         public bool IsExitRoom = false;
 
+        
     }
 }

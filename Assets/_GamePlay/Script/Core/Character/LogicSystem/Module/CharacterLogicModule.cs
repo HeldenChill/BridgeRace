@@ -51,7 +51,7 @@ namespace BridgeRace.Core.Character.LogicSystem
 
             CheckPlayer();            
             CheckExitRoom();
-            disableMovement = !CollideBridgeBrickHandle();
+            disableMovement = !CollideBridgeBrickHandle() || (!Parameter.IsHaveGround && Parameter.IsGrounded);
             CollideEatBrickHandle();
             RotationHandle();
             if (!disableMovement)
@@ -60,7 +60,7 @@ namespace BridgeRace.Core.Character.LogicSystem
             }
             else
             {
-                Event.SetVelocity(Vector3.back * 5f);
+                Event.SetVelocity(-Parameter.SensorTF.forward * 0.1f);
             }
         }
         public void CheckPlayer()

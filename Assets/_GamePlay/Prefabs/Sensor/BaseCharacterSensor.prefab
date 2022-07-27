@@ -45,11 +45,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionCheck: {fileID: 1721007091}
   height: 1
-  radius: 0.2
+  radius: 0.5
   layer:
     serializedVersion: 2
     m_Bits: 256
   parentCollider: {fileID: 0}
+--- !u!1 &1915530905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1915530906}
+  - component: {fileID: 1915530907}
+  m_Layer: 8
+  m_Name: HaveGroundCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1915530906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915530905}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.309, z: 0.408}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5191400267062498707}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915530907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915530905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf878843f731f8e469e459599cd5a71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkHaveGroundPoint: {fileID: 1915530906}
+  distance: 0.8
+  layer:
+    serializedVersion: 2
+    m_Bits: 72
 --- !u!1 &1699727529742946794
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +179,7 @@ Transform:
   - {fileID: 9202475185049464931}
   - {fileID: 4316129512823006772}
   - {fileID: 1721007091}
+  - {fileID: 1915530906}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -152,6 +201,7 @@ MonoBehaviour:
   - {fileID: 4798495627368198223}
   - {fileID: 4069881155849787828}
   - {fileID: 1721007092}
+  - {fileID: 1915530907}
 --- !u!1 &5191400267934449845
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4316129512823006772}
   - component: {fileID: 4069881155849787828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExitCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

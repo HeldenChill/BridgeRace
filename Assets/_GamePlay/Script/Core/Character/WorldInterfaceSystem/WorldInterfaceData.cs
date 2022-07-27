@@ -17,6 +17,8 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
         public List<EatBrick> EatBricks;
         public List<AbstractCharacter> Characters;
         public BridgeBrick BridgeBrick;
+
+        public bool IsHaveGround = false;
         public bool IsGrounded = false;
         public bool IsExitRoom = false;
         public int CurrentRoomID = 0;
@@ -27,6 +29,7 @@ namespace BridgeRace.Core.Character.WorldInterfaceSystem
             {
                 Clone = CreateInstance(typeof(WorldInterfaceData)) as WorldInterfaceData;
             }
+            Clone.IsHaveGround = IsHaveGround;
             Clone.IsGrounded = IsGrounded;
             Clone.IsExitRoom = IsExitRoom;
             Clone.BridgeBrick = BridgeBrick;

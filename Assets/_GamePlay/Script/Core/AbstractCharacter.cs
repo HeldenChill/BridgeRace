@@ -23,6 +23,9 @@ namespace BridgeRace.Core
         protected SkinnedMeshRenderer mesh;
         [SerializeField]
         public Transform ContainBrick;
+        [SerializeField]
+        protected Transform SensorTF;
+
         protected CharacterData Data;
 
         protected CharacterWorldInterfaceSystem WorldInterfaceSystem;

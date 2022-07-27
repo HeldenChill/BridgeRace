@@ -116,13 +116,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8702391802157041681}
-  m_LocalRotation: {x: -0.21451236, y: -0.16734257, z: 0.029257094, w: 0.9618342}
-  m_LocalPosition: {x: 0.041147787, y: -0.044925366, z: -0.10581849}
+  m_LocalRotation: {x: -0.106977195, y: 0.021145852, z: 0.012337027, w: 0.9939601}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 0.33333346, y: 0.33333346, z: 0.3333334}
   m_Children: []
   m_Father: {fileID: 8803243409937421601}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -12.309, y: 2.311, z: 1.173}
 --- !u!1 &8850179646756028488
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +243,7 @@ MonoBehaviour:
   type: 1
   mesh: {fileID: 2876620873175977680}
   ContainBrick: {fileID: 8702391802157041680}
+  SensorTF: {fileID: 2795169625904955809}
   WorldInterfaceModule: {fileID: 3183834785441184557}
   NavigationModule: {fileID: 7286221389658224557}
   LogicModule: {fileID: 9186961397654366233}
@@ -260,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0347da1903241041bbad3550ade1802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numBrickToBridge: 20
 --- !u!114 &9186961397654366233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,8 +287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 9186961397654366239}
-  charSensor: {fileID: 8042318123945091778}
-  charModel: {fileID: 8133555534771686750}
+  charSensor: {fileID: 8133555534771686750}
+  charModel: {fileID: 8042318123945091778}
   detectCollisions: 0
   rotateSpeed: 10
 --- !u!114 &8537937406178887572
@@ -620,7 +622,7 @@ PrefabInstance:
       objectReference: {fileID: 1986384008796724771}
     - target: {fileID: 5191400267062498669, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: sensors.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5191400267062498669, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: sensors.Array.data[4]
@@ -630,6 +632,10 @@ PrefabInstance:
       propertyPath: sensors.Array.data[5]
       value: 
       objectReference: {fileID: 1052823926066856097}
+    - target: {fileID: 5191400267062498669, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
+      propertyPath: sensors.Array.data[6]
+      value: 
+      objectReference: {fileID: 7216121028346151131}
     - target: {fileID: 5191400267062498706, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
       propertyPath: m_Name
       value: BaseCharacterSensor
@@ -714,5 +720,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17a5e8686c207c54e9c216cba3f04a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7216121028346151131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1915530907, guid: 10544db6ab6324c4a8c617cab1950787, type: 3}
+  m_PrefabInstance: {fileID: 7216121028582321728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf878843f731f8e469e459599cd5a71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
