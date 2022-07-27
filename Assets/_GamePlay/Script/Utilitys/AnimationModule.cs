@@ -36,6 +36,7 @@ public class AnimationModule : MonoBehaviour
 
     public void SetInt(string name, int value)
     {
+        ExitAnimator();
         Anim.SetInteger(name, value);
     }
     public void SetActive(bool p)

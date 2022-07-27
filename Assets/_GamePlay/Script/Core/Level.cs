@@ -1,3 +1,4 @@
+using BridgeRace.Manager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace BridgeRace.Core
         private List<AddRoom> rooms = new List<AddRoom>();
         private Dictionary<int, int> playerToRoom = new Dictionary<int, int>();
         private Dictionary<int, float> player2OldHeight = new Dictionary<int, float>();
+        private List<int> playerInstanceIDs;
         
 
         Vector2 roomSize1 = Vector2.one * 12;
@@ -24,6 +26,7 @@ namespace BridgeRace.Core
         public void Initialize(List<int> playerInstanceID)
         {
             //NOTE: Construct Room Here
+            this.playerInstanceIDs = playerInstanceID;
 
             rooms.Add(new AddRoom(Vector3.zero, roomSize1));
             rooms[0].ConstructRoom();
@@ -70,10 +73,17 @@ namespace BridgeRace.Core
                 if (playerToRoom[playerInstanceID] >= rooms.Count)
                 {
                     OnWin?.Invoke(playerInstanceID);
-                    Debug.Log("Level Win");
+                    if (playerInstanceID == playerInstanceIDs[0])
+                    {
+                        UIManager.Inst.OpenUI(UIID.UICVictory);
+                    }
+                    else
+                    {
+                        UIManager.Inst.OpenUI(UIID.UICFail);
+                    }
                 }
             }
-            Debug.Log("Room: " + playerToRoom[playerInstanceID]);
+            //Debug.Log("Room: " + playerToRoom[playerInstanceID]);
         }
 
         public AddRoom GetCurrentRoom(int playerInstanceID)

@@ -240,7 +240,6 @@ namespace BridgeRace.Core.Character.LogicSystem
         {
             isEndLevel = true;
             Parameter.ContainBrick.gameObject.SetActive(false);
-            Debug.Log("Character Win Level");
             if(Parameter.PlayerInstanceID == playerInstanceID)
             {
                 Event.SetInt_Anim(AnimationModule.ANIM_RESULT, 2);

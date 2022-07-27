@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BridgeRace.Core
 {
+    using Manager;
     public class Bridge : MonoBehaviour
     {
         [SerializeField]
