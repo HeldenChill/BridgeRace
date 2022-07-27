@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,15 @@ namespace BridgeRace.Core
     public class Level : MonoBehaviour
     {
         public Transform StaticEnvironment;
+        public Transform WinPosition;
+
+        public event Action<int> OnWin;
         [SerializeField]
         private GameObject Destination;
         private List<AddRoom> rooms = new List<AddRoom>();
         private Dictionary<int, int> playerToRoom = new Dictionary<int, int>();
         private Dictionary<int, float> player2OldHeight = new Dictionary<int, float>();
+        
 
         Vector2 roomSize1 = Vector2.one * 12;
         Vector2 roomSize2 = Vector2.one * 10;
@@ -64,7 +69,8 @@ namespace BridgeRace.Core
 
                 if (playerToRoom[playerInstanceID] >= rooms.Count)
                 {
-                    Debug.Log("Game Win");
+                    OnWin?.Invoke(playerInstanceID);
+                    Debug.Log("Level Win");
                 }
             }
             Debug.Log("Room: " + playerToRoom[playerInstanceID]);

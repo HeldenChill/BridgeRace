@@ -244,7 +244,7 @@ namespace Utilitys
         public static bool IsApproximately(Vector2 v1,Vector2 v2)
         {
             Vector2 value = v1 - v2;
-            if(value.sqrMagnitude < 0.01f)
+            if(value.sqrMagnitude < 0.0001f)
             {
                 return true;
             }

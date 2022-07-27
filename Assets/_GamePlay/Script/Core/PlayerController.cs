@@ -21,7 +21,8 @@ public class PlayerController : AbstractCharacter
     AbstractLogicModule LogicModule;
     [SerializeField]
     AbstractPhysicModule PhysicModule;
-                 
+    [SerializeField]
+    AnimationModule AnimModule;
     private void Awake()
     {
         Data = ScriptableObject.CreateInstance(typeof(CharacterData)) as CharacterData;
@@ -51,6 +52,9 @@ public class PlayerController : AbstractCharacter
         LogicSystem.Event.SetVelocity += PhysicSystem.SetVelocity;
         LogicSystem.Event.SetRotation += PhysicSystem.SetRotation;
         LogicSystem.Event.SetSmoothRotation += PhysicSystem.SetSmoothRotation;
+        LogicSystem.Event.SetBool_Anim += SetBool_Anim;
+        LogicSystem.Event.SetFloat_Anim += SetFloat_Anim;
+        LogicSystem.Event.SetInt_Anim += SetInt_Anim;
         #endregion
     }
 
@@ -67,6 +71,9 @@ public class PlayerController : AbstractCharacter
         LogicSystem.Event.SetVelocity -= PhysicSystem.SetVelocity;
         LogicSystem.Event.SetRotation -= PhysicSystem.SetRotation;
         LogicSystem.Event.SetSmoothRotation -= PhysicSystem.SetSmoothRotation;
+        LogicSystem.Event.SetBool_Anim -= SetBool_Anim;
+        LogicSystem.Event.SetFloat_Anim -= SetFloat_Anim;
+        LogicSystem.Event.SetInt_Anim -= SetInt_Anim;
         #endregion
     }
 
@@ -76,6 +83,27 @@ public class PlayerController : AbstractCharacter
         NavigationSystem.Run();
         LogicSystem.Run();
         PhysicSystem.Run();
+    }
+    private void SetBool_Anim(string name,bool code)
+    {
+        if (code)
+        {
+            AnimModule?.Activate(name);
+        }
+        else
+        {
+            AnimModule?.Deactivate(name);
+        }
+    }
+
+    private void SetFloat_Anim(string name,float value)
+    {
+        AnimModule?.SetFloat(name, value);
+    }
+
+    private void SetInt_Anim(string name,int value)
+    {
+        AnimModule?.SetInt(name, value);
     }
 
     public override void ChangeColor(BrickColor color)

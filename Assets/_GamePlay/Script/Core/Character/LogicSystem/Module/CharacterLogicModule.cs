@@ -14,14 +14,38 @@ namespace BridgeRace.Core.Character.LogicSystem
         private Vector2 direction = Vector2.zero;
         private bool disableMovement = false;
         private bool isFall = false;
+        private bool isEndLevel = false;
+        private bool isWinPlayer = false;
         STimer fallTimer = new STimer();
 
         private void OnEnable()
         {
-            fallTimer.TimeOut1 += TimerUpdate;
+            fallTimer.TimeOut1 += TimerUpdate;        
+        }
+        private void Start()
+        {
+            LevelManager.Inst.CurrentLevel.OnWin += OnWinLevel;
+        }
+
+        private void OnDisable()
+        {
+            fallTimer.TimeOut1 -= TimerUpdate;
+            LevelManager.Inst.CurrentLevel.OnWin -= OnWinLevel;
+
         }
         public override void UpdateData()
         {
+            if (isEndLevel)
+            {
+                if (isWinPlayer)
+                {
+                    gameObject.transform.position = LevelManager.Inst.CurrentLevel.WinPosition.position;
+                    Event.SetSmoothRotation(GameConst.SENSOR_ROT, Vector3.back);
+                    Event.SetSmoothRotation(GameConst.MODEL_ROT, Vector3.back);
+                }
+                return;
+            }
+
             if (isFall)
                 return;
 
@@ -71,8 +95,8 @@ namespace BridgeRace.Core.Character.LogicSystem
                 brick.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
                 brick.BrickFall();
             }
-            Debug.Log("FALL");
-            //TODO: Fall Here
+            Event.SetBool_Anim(AnimationModule.ANIM_FALL, true);
+            //Debug.Log("FALL");
         }
 
         private void CheckExitRoom()
@@ -125,7 +149,7 @@ namespace BridgeRace.Core.Character.LogicSystem
         private void RotationHandle()
         {
             Vector2 newDirection = new Vector2(Parameter.MoveDirection.x, Parameter.MoveDirection.z);
-            if (!MathHelper.IsApproximately(newDirection, direction) && newDirection.sqrMagnitude > 0.001f)
+            if (!MathHelper.IsApproximately(newDirection, direction) && newDirection.sqrMagnitude > 0.01f)
             {
                 float angle = Mathf.Atan2(newDirection.x, newDirection.y) * Mathf.Rad2Deg;
                     //Vector2.SignedAngle(newDirection, Vector2.up);              
@@ -156,6 +180,8 @@ namespace BridgeRace.Core.Character.LogicSystem
             }
 
             Event.SetVelocity(velocity);
+            velocity.y = 0;
+            Event.SetFloat_Anim(AnimationModule.ANIM_VELOCITY, velocity.sqrMagnitude);
         }
 
         public EatBrick GetBrick()
@@ -206,13 +232,27 @@ namespace BridgeRace.Core.Character.LogicSystem
             if(code == 0)
             {
                 isFall = false;
+                Event.SetBool_Anim(AnimationModule.ANIM_FALL, false);
             }
         }
 
-        private void OnDisable()
+        private void OnWinLevel(int playerInstanceID)
         {
-            fallTimer.TimeOut1 -= TimerUpdate;
+            isEndLevel = true;
+            Parameter.ContainBrick.gameObject.SetActive(false);
+            Debug.Log("Character Win Level");
+            if(Parameter.PlayerInstanceID == playerInstanceID)
+            {
+                Event.SetInt_Anim(AnimationModule.ANIM_RESULT, 2);
+                isWinPlayer = true;
+            }
+            else
+            {
+                Event.SetInt_Anim(AnimationModule.ANIM_RESULT, 1);
+            }
         }
+
+
 
     }
 }

@@ -6,7 +6,11 @@ using System;
 public class AnimationModule : MonoBehaviour
 {
     public event Action<string> UpdateEventAnimationState;
-    public readonly string PLAYER_ANIM_STATE = "State";
+
+    //NOTE: Specific for game,change to reuse
+    public static readonly string ANIM_FALL = "isFall";
+    public static readonly string ANIM_VELOCITY = "velocity";
+    public static readonly string ANIM_RESULT = "Result";
     [SerializeField]
     private Animator Anim;
     public void Activate(string AnimBoolName)
@@ -25,12 +29,15 @@ public class AnimationModule : MonoBehaviour
         Anim.Rebind();
         Anim.Update(0f);
     }
-    public void SetState(string name, int state)
+    public void SetFloat(string name, float value)
     {
-        ExitAnimator();
-        Anim.SetInteger(name, state);      
+        Anim.SetFloat(name, value);      
     }
 
+    public void SetInt(string name, int value)
+    {
+        Anim.SetInteger(name, value);
+    }
     public void SetActive(bool p)
     {
         Anim.enabled = p;
