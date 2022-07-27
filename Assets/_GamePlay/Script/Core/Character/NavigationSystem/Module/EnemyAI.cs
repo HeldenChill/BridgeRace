@@ -10,6 +10,8 @@ namespace BridgeRace.Core.Character.NavigationSystem
     {
         public const float EAT_BRICK_PRECISION = 20;
 
+        [SerializeField]
+        int numBrickToBridge = 10;
         bool goToBrick = false;
         bool goToEntrance1 = false;
         bool goToEntrance2 = false;
@@ -37,7 +39,7 @@ namespace BridgeRace.Core.Character.NavigationSystem
             }
             else  // NOTE: When in add room situation
             {
-                if (Parameter.CharacterData.Bricks.Count > 10) //NOTE: Collect enough bricks
+                if (Parameter.CharacterData.Bricks.Count > numBrickToBridge) //NOTE: Collect enough bricks
                 {
                     GoToEntrance1();
                 }
