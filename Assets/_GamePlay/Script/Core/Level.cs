@@ -18,11 +18,14 @@ namespace BridgeRace.Core
         private Dictionary<int, int> playerToRoom = new Dictionary<int, int>();
         private Dictionary<int, float> player2OldHeight = new Dictionary<int, float>();
         private List<int> playerInstanceIDs;
+        private bool isEndLevel = false;
         
 
         Vector2 roomSize1 = Vector2.one * 12;
         Vector2 roomSize2 = Vector2.one * 10;
         Vector2 roomSize3 = Vector2.one * 8;
+
+        public bool IsEndLevel => isEndLevel;
         public void Initialize(List<int> playerInstanceID)
         {
             //NOTE: Construct Room Here
@@ -73,6 +76,8 @@ namespace BridgeRace.Core
                 if (playerToRoom[playerInstanceID] >= rooms.Count)
                 {
                     OnWin?.Invoke(playerInstanceID);
+                    DeconstructLevel();
+                    isEndLevel = true;
                     if (playerInstanceID == playerInstanceIDs[0])
                     {
                         UIManager.Inst.OpenUI(UIID.UICVictory);
@@ -84,6 +89,27 @@ namespace BridgeRace.Core
                 }
             }
             //Debug.Log("Room: " + playerToRoom[playerInstanceID]);
+        }
+        public void DeconstructLevel()
+        {
+            for(int i = 0; i < rooms.Count; i++)
+            {
+                rooms[i].DeconstructRoom();
+            }
+
+            //NOTE: Hereh may cause error
+            List<GameObject> eatBricks = new List<GameObject>();
+            for (int i = 0; i < StaticEnvironment.childCount; i++)
+            {
+                eatBricks.Add(StaticEnvironment.GetChild(i).gameObject);
+            }
+
+            for(int i = 0; i < eatBricks.Count; i++)
+            {
+                Cache.GetEatBrick(eatBricks[i]).SetActivePhysic(false);
+                PrefabManager.Inst.PushToPool(eatBricks[i], PrefabManager.EAT_BRICK, false);
+            }
+            
         }
 
         public AddRoom GetCurrentRoom(int playerInstanceID)

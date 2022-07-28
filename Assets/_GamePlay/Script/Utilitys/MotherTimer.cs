@@ -32,7 +32,7 @@ namespace Utilitys.Timer
 
         public void Update()
         {
-            TimerUpdate.Invoke();
+            TimerUpdate?.Invoke();
         }
 
         ~MotherTimer()

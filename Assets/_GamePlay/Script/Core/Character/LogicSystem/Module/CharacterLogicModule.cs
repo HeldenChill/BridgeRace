@@ -222,7 +222,7 @@ namespace BridgeRace.Core.Character.LogicSystem
                 
 
                 AddRoom room = LevelManager.Inst.CurrentLevel.GetCurrentRoom(Parameter.PlayerInstanceID);
-                room.AteEatBrick(brick.gameObject.GetInstanceID(), brick.Color);
+                room.AteEatBrick(brick.gameObject, brick.Color);
                 //Debug.Log("Character " + Parameter.EatBricks.Count + ": "+ brick.GetInstanceID());
             }
         }
@@ -239,7 +239,11 @@ namespace BridgeRace.Core.Character.LogicSystem
         private void OnWinLevel(int playerInstanceID)
         {
             isEndLevel = true;
-            Parameter.ContainBrick.gameObject.SetActive(false);
+            while(Data.CharacterData.Bricks.Count > 0)
+            {
+                EatBrick brick = Data.CharacterData.Bricks.Pop();
+                PrefabManager.Inst.PushToPool(brick.gameObject, PrefabManager.EAT_BRICK, false);
+            }
             if(Parameter.PlayerInstanceID == playerInstanceID)
             {
                 Event.SetInt_Anim(AnimationModule.ANIM_RESULT, 2);

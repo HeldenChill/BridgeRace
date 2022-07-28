@@ -14,8 +14,8 @@ namespace BridgeRace.Manager
         //private static GameState gameState = GameState.MainMenu;
 
         // Start is called before the first frame update
-        bool gameIsStart = false;
-        public bool GameIsStart => gameIsStart;
+        bool gameIsRun = false;
+        public bool GameIsRun => gameIsRun;
         protected override void Awake()
         {
             base.Awake();
@@ -42,13 +42,13 @@ namespace BridgeRace.Manager
 
         public void StartGame()
         {
-            gameIsStart = true;
+            gameIsRun = true;
             Time.timeScale = 1;
         }
 
         public void StopGame()
         {
-            gameIsStart = false;
+            gameIsRun = false;
             Time.timeScale = 0;
         }
 

@@ -10,8 +10,8 @@ namespace BridgeRace.UI
     {
         public void PlayGameButton()
         {
-            UIManager.Inst.OpenUI(UIID.UICGamePlay);
-            GameManager.Inst.StartGame();
+            CanvasGameplay canvas = (CanvasGameplay)UIManager.Inst.OpenUI(UIID.UICGamePlay);
+            canvas.StartGame();
             Close();
         }
     }
