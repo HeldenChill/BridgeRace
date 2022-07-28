@@ -16,6 +16,26 @@ namespace BridgeRace.UI
             text.text = data.ToString();
         }
 
+        public void NextLevelButton()
+        {
+            int v = LevelManager.Inst.CurrentLevel.CurrentLevelIndex;
+            v += 1;
+            LevelManager.Inst.CurrentLevel.ConstructLevel(v);            
+            CanvasGameplay ui = (CanvasGameplay)UIManager.Inst.OpenUI(UIID.UICGamePlay);
+            GameManager.Inst.StopGame();
+            ui.StartGame();
+            Close();
+        }
+
+        public void PlayAgainButton()
+        {
+            int v = LevelManager.Inst.CurrentLevel.CurrentLevelIndex;
+            LevelManager.Inst.CurrentLevel.ConstructLevel(v);
+            CanvasGameplay ui = (CanvasGameplay)UIManager.Inst.OpenUI(UIID.UICGamePlay);
+            GameManager.Inst.StopGame();
+            ui.StartGame();
+            Close();
+        }
         public void MainMenuButton()
         {
             UIManager.Inst.OpenUI(UIID.UICMainMenu);

@@ -299,4 +299,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fence1: {fileID: 6979803229626549130}
   fence2: {fileID: 1536838946166282160}
-  NumOfBrick: 30
+  NumOfBrick: 10

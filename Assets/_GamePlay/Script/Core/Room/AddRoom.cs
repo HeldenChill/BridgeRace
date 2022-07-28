@@ -10,6 +10,7 @@ namespace BridgeRace.Core
     using Utilitys.Timer;
     public class AddRoom 
     {
+        //NOTE: Reuse the room
         private const int MARGIN = 2;
         private const float SIZE_Y_ROOM = 1f;
         private readonly float EAT_BRICK_HEIGHT = SIZE_Y_ROOM / 2 + GameConst.EAT_BRICK_HEIGHT / 2;
@@ -53,6 +54,7 @@ namespace BridgeRace.Core
 
         public void ConstructRoom()
         {
+            oldPlayerInstanceID.Clear();
             ground = PrefabManager.Inst.PopFromPool(PrefabManager.GROUND);
             ground.transform.parent = LevelManager.Inst.CurrentLevel.StaticEnvironment;
             ground.transform.localPosition = roomPos;
@@ -127,6 +129,11 @@ namespace BridgeRace.Core
             for(int i = 0; i < eatBricks.Count; i++)
             {
                 PrefabManager.Inst.PushToPool(eatBricks[i], PrefabManager.EAT_BRICK, false);
+            }
+
+            foreach(var i in posToTimer)
+            {
+                i.Value.Stop();
             }
         }
         private void InitializeBridge()

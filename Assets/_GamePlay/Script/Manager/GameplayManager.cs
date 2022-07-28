@@ -17,7 +17,6 @@ namespace BridgeRace.Manager
         private List<Material> BrickMaterial;       
         [SerializeField]
         private List<GameObject> players;
-        private List<int> playerInstanceID = new List<int>();
         [HideInInspector]
         public List<BrickColor> PlayerColors = new List<BrickColor>();
         public int NumOfPlayer => players.Count;
@@ -30,12 +29,11 @@ namespace BridgeRace.Manager
         {
             for (int i = 0; i < players.Count; i++)
             {
-                playerInstanceID.Add(players[i].GetInstanceID());
                 BrickColor color = PLAYER_COLOR[i];
                 players[i].GetComponent<AbstractCharacter>().ChangeColor(color);
                 PlayerColors.Add(color);
             }
-            LevelManager.Inst.SetPlayers(playerInstanceID);
+            LevelManager.Inst.SetPlayers(players);
         }
         public Material GetMaterial(BrickColor color)
         {

@@ -14,7 +14,6 @@ namespace BridgeRace.Core.Character.LogicSystem
         private Vector2 direction = Vector2.zero;
         private bool disableMovement = false;
         private bool isFall = false;
-        private bool isEndLevel = false;
         private bool isWinPlayer = false;
         STimer fallTimer = new STimer();
 
@@ -25,17 +24,23 @@ namespace BridgeRace.Core.Character.LogicSystem
         private void Start()
         {
             LevelManager.Inst.CurrentLevel.OnWin += OnWinLevel;
+            LevelManager.Inst.CurrentLevel.OnStart += OnStartLevel;
         }
 
         private void OnDisable()
         {
             fallTimer.TimeOut1 -= TimerUpdate;
             LevelManager.Inst.CurrentLevel.OnWin -= OnWinLevel;
-
+            LevelManager.Inst.CurrentLevel.OnStart -= OnStartLevel;
         }
         public override void UpdateData()
         {
-            if (isEndLevel)
+            if (!GameManager.Inst.GameIsRun)
+            {
+                return;
+            }
+
+            if (LevelManager.Inst.CurrentLevel.IsEndLevel)
             {
                 if (isWinPlayer)
                 {
@@ -103,8 +108,8 @@ namespace BridgeRace.Core.Character.LogicSystem
         {
             if (Parameter.IsExitRoom)
             {
-                LevelManager.Inst.CurrentLevel.SetPlayerRoom(Parameter.PlayerInstanceID,Parameter.ContainBrick.position.y);
-                AddRoom room = LevelManager.Inst.CurrentLevel.GetCurrentRoom(Parameter.PlayerInstanceID);               
+                LevelManager.Inst.CurrentLevel.SetPlayerRoom(Parameter.PlayerInstanceID, Parameter.ContainBrick.position.y);
+                AddRoom room = LevelManager.Inst.CurrentLevel.GetCurrentRoom(Parameter.PlayerInstanceID);  
                 room?.AddColorAndBrick(Parameter.PlayerInstanceID, Parameter.CharacterType);
             }
         }
@@ -238,10 +243,10 @@ namespace BridgeRace.Core.Character.LogicSystem
 
         private void OnWinLevel(int playerInstanceID)
         {
-            isEndLevel = true;
             while(Data.CharacterData.Bricks.Count > 0)
             {
                 EatBrick brick = Data.CharacterData.Bricks.Pop();
+                brick.transform.rotation = Quaternion.Euler(Vector3.zero);
                 PrefabManager.Inst.PushToPool(brick.gameObject, PrefabManager.EAT_BRICK, false);
             }
             if(Parameter.PlayerInstanceID == playerInstanceID)
@@ -254,7 +259,12 @@ namespace BridgeRace.Core.Character.LogicSystem
                 Event.SetInt_Anim(AnimationModule.ANIM_RESULT, 1);
             }
         }
-
+        private void OnStartLevel()
+        {
+            //Debug.Log(gameObject.name + " Start level");
+            isWinPlayer = false;
+            Event.SetInt_Anim(AnimationModule.ANIM_RESULT, 0);
+        }
 
 
     }

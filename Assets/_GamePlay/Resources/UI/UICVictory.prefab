@@ -567,6 +567,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8070103426510838468}
+    - target: {fileID: 7761272683904494274, guid: 58c05ba93299f774bbd245b0c4e948f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextLevelButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7761272683904494274, guid: 58c05ba93299f774bbd245b0c4e948f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BridgeRace.UI.CanvasVictory, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7761272683904494275, guid: 58c05ba93299f774bbd245b0c4e948f5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -689,6 +697,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8070103426510838468}
+    - target: {fileID: 7166033938278542871, guid: e89d1a13a18b05e4ab5b39ab71a36b42, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayAgainButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166033938278542871, guid: e89d1a13a18b05e4ab5b39ab71a36b42, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BridgeRace.UI.CanvasVictory, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8241333296152050868, guid: e89d1a13a18b05e4ab5b39ab71a36b42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

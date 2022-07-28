@@ -19,10 +19,11 @@ namespace BridgeRace.UI
         bool isShowBanner = true;
 
         public void StartGame()
-        {
+        {           
             timeRemaining = 3.4f;
             optionMenuButton.SetActive(false);
             timerBanner.SetActive(true);
+            isShowBanner = true;
         }
 
         private void Update()

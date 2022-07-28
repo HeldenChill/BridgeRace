@@ -36,7 +36,7 @@ namespace BridgeRace.Manager
             //ChangeState(GameState.MainMenu);
 
             UIManager.Inst.OpenUI(UIID.UICMainMenu);
-            Time.timeScale = 0;
+            StopGame();
 
         }
 

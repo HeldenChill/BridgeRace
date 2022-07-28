@@ -11,9 +11,9 @@ namespace BridgeRace.Manager
         [SerializeField]
         private Level currentLevel;
         public Level CurrentLevel => currentLevel;
-        public void SetPlayers(List<int> playerInstanceID)
+        public void SetPlayers(List<GameObject> players)
         {
-            CurrentLevel.Initialize(playerInstanceID);
+            CurrentLevel.Initialize(players);
         }
     }
 }

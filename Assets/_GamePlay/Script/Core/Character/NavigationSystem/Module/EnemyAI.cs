@@ -10,6 +10,16 @@ namespace BridgeRace.Core.Character.NavigationSystem
     {
         public const float EAT_BRICK_PRECISION = 20;
 
+        private void Start()
+        {
+            LevelManager.Inst.CurrentLevel.OnStart += OnStartLevel;
+        }
+
+        private void OnDisable()
+        {
+            LevelManager.Inst.CurrentLevel.OnStart -= OnStartLevel;
+        }
+
         [SerializeField]
         int numBrickToBridge = 10;
         bool goToBrick = false;
@@ -169,6 +179,15 @@ namespace BridgeRace.Core.Character.NavigationSystem
         void CheckPlayer()
         {
 
+        }
+
+        private void OnStartLevel()
+        {
+            goToBrick = false;
+            goToEntrance1 = false;
+            goToEntrance2 = false;
+            isHaveDestination = false;
+            isOnBridge = false;
         }
     }
 }

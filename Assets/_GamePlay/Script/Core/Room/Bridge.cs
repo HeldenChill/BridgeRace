@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BridgeRace.Core
 {
+    using BridgeRace.Core.Brick;
     using Manager;
     using System;
 
@@ -30,6 +31,8 @@ namespace BridgeRace.Core
             for(int i = 0; i < NumOfBrick; i++)
             {
                 GameObject brick = PrefabManager.Inst.PopFromPool(PrefabManager.BRIDGE_BRICK);
+                BridgeBrick brickScript = Cache.GetBridgeBrick(brick);
+                brickScript.ChangeColor(BrickColor.None);
                 brick.transform.parent = gameObject.transform;
                 brick.transform.localPosition = tempPos;
                 bridgeBricks.Add(brick);

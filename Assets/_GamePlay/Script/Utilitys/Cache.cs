@@ -8,11 +8,22 @@ using BridgeRace.Core;
 public static class Cache 
 {
     private static Dictionary<Collider, BridgeBrick> collider2BridgeBricks = new Dictionary<Collider, BridgeBrick>();
+    private static Dictionary<GameObject, BridgeBrick> gameobject2BridgeBricks = new Dictionary<GameObject, BridgeBrick>();
     private static Dictionary<Collider, EatBrick> collider2EatBricks = new Dictionary<Collider, EatBrick>();
     private static Dictionary<GameObject, EatBrick> gameobject2EatBricks = new Dictionary<GameObject, EatBrick>();
     private static Dictionary<GameObject, Bridge> gameobject2Bridges = new Dictionary<GameObject, Bridge>();
 
     private static Dictionary<Collider, AbstractCharacter> collider2Character = new Dictionary<Collider, AbstractCharacter>();
+
+    public static BridgeBrick GetBridgeBrick(GameObject col)
+    {
+        if (!gameobject2BridgeBricks.ContainsKey(col))
+        {
+            gameobject2BridgeBricks.Add(col, col.gameObject.GetComponent<BridgeBrick>());
+        }
+        return gameobject2BridgeBricks[col];
+    }
+
     public static BridgeBrick GetBridgeBrick(Collider col)
     {
         if (!collider2BridgeBricks.ContainsKey(col))

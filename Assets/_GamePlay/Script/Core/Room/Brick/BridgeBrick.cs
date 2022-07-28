@@ -23,6 +23,13 @@ namespace BridgeRace.Core.Brick
 
         public override void ChangeColor(BrickColor color)
         {
+            if(color == BrickColor.None)
+            {
+                type = color;
+                model.SetActive(false);
+                return;
+            }
+
             if(type == BrickColor.None && color != type)
             {
                 model.SetActive(true);

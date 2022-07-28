@@ -637,6 +637,18 @@ PrefabInstance:
       propertyPath: m_Colors.m_NormalColor.r
       value: 0.6698113
       objectReference: {fileID: 0}
+    - target: {fileID: 7166033938278542871, guid: e89d1a13a18b05e4ab5b39ab71a36b42, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3582554860822475433}
+    - target: {fileID: 7166033938278542871, guid: e89d1a13a18b05e4ab5b39ab71a36b42, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayAgainButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166033938278542871, guid: e89d1a13a18b05e4ab5b39ab71a36b42, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BridgeRace.UI.CanvasFail, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8241333296152050868, guid: e89d1a13a18b05e4ab5b39ab71a36b42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
