@@ -8,12 +8,14 @@ namespace BridgeRace.Core.Character.NavigationSystem
     using BridgeRace.Core.Data;
     public class NavigationParameter : AbstractParameterSystem
     {
-        public Transform Player;
+        public Transform PlayerTF;
+        public Transform SensorTF;
         public BrickColor CharacterType;
         public CharacterData CharacterData;
         public int PlayerInstanceID;
 
         public bool IsGrounded = false;
+        public bool IsHaveGround = false;
         public List<EatBrick> EatBricks;
         public List<Vector3> EnemyPositions;
         public int BrickCount;

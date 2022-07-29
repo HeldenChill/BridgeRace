@@ -49,7 +49,11 @@ namespace BridgeRace.Core.Character.NavigationSystem
             }
             else  // NOTE: When in add room situation
             {
-                if (Parameter.CharacterData.Bricks.Count > numBrickToBridge) //NOTE: Collect enough bricks
+                if(!Parameter.IsHaveGround && Parameter.IsGrounded)
+                {
+                    Wandering();
+                }
+                else if (Parameter.CharacterData.Bricks.Count > numBrickToBridge) //NOTE: Collect enough bricks
                 {
                     GoToEntrance1();
                 }
@@ -83,25 +87,36 @@ namespace BridgeRace.Core.Character.NavigationSystem
         }
         void GetEatBrickDestination()
         {
-            if (!goToBrick && Parameter.EatBricks.Count > 0)
+            if (!goToBrick)
             {
-                for(int i = 0; i < Parameter.EatBricks.Count; i++)
+                if(Parameter.EatBricks.Count > 0)
                 {
-                    if(Parameter.EatBricks[i].Color == Parameter.CharacterType)
+                    for (int i = 0; i < Parameter.EatBricks.Count; i++)
                     {
-                        if (MathHelper.GetRandomPercent(EAT_BRICK_PRECISION))
+                        if (Parameter.EatBricks[i].Color == Parameter.CharacterType || Parameter.EatBricks[i].Color == Brick.BrickColor.Gray)
                         {
-                            NextDestination = Parameter.EatBricks[i].gameObject.transform.position;
-                            break;
+                            if (MathHelper.GetRandomPercent(EAT_BRICK_PRECISION))
+                            {
+                                NextDestination = Parameter.EatBricks[i].gameObject.transform.position;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!isHaveDestination)
+                    {
+                        if (Parameter.EatBricks.Count > 0)
+                        {
+                            int index = Random.Range(0, Parameter.EatBricks.Count);
+                            NextDestination = Parameter.EatBricks[index].gameObject.transform.position;
                         }
                     }
                 }
-
-                if (!isHaveDestination)
+                else
                 {
-                    int index = Random.Range(0, Parameter.EatBricks.Count);
-                    NextDestination = Parameter.EatBricks[index].gameObject.transform.position;
+                    Wandering();                  
                 }
+                
                 
                 goToBrick = true;
                 
@@ -125,16 +140,13 @@ namespace BridgeRace.Core.Character.NavigationSystem
                 goToEntrance1 = true;
             }
             
-        }
-
-        
-
+        }      
         void CheckDestination()
         {
             //NOTE: Can Inprove performance by save dir;
             if (isHaveDestination)
             {
-                Vector3 dir = NextDestination - Parameter.Player.position;
+                Vector3 dir = NextDestination - Parameter.PlayerTF.position;
                 dir.y = 0;
                 if (dir.sqrMagnitude < 0.01f) //NOTE: When Reach Destination
                 {
@@ -174,7 +186,21 @@ namespace BridgeRace.Core.Character.NavigationSystem
 
         void Wandering()
         {
+            Vector3 random;
+            float sensorRotation = Parameter.SensorTF.eulerAngles.y + 90;
+            if (Parameter.IsHaveGround)
+            {
+                random = MathHelper.GetRandomDirection(sensorRotation - 45, sensorRotation + 45);
+            }
+            else
+            {
+                random = MathHelper.GetRandomDirection(sensorRotation - 180 - 45, sensorRotation - 180 + 45);
+            }
 
+
+            random.z = random.y;
+            random.y = 0;
+            NextDestination = Parameter.PlayerTF.position + random * 5;
         }
         void CheckPlayer()
         {

@@ -56,7 +56,7 @@ namespace BridgeRace.Core.Character.LogicSystem
 
             CheckPlayer();            
             CheckExitRoom();
-            disableMovement = !CollideBridgeBrickHandle() || (!Parameter.IsHaveGround && Parameter.IsGrounded);
+            disableMovement = !CollideBridgeBrickHandle() || ((!Parameter.IsHaveGround && Parameter.BridgeBrick == null) && Parameter.IsGrounded);
             CollideEatBrickHandle();
             RotationHandle();
             if (!disableMovement)
@@ -249,6 +249,9 @@ namespace BridgeRace.Core.Character.LogicSystem
                 brick.transform.rotation = Quaternion.Euler(Vector3.zero);
                 PrefabManager.Inst.PushToPool(brick.gameObject, PrefabManager.EAT_BRICK, false);
             }
+            Event.SetRotation(GameConst.CHARACTER_ROT, Quaternion.Euler(0,180,0));
+            Event.SetRotation(GameConst.MODEL_ROT, Quaternion.Euler(0,180,0));
+
             if(Parameter.PlayerInstanceID == playerInstanceID)
             {
                 Event.SetInt_Anim(AnimationModule.ANIM_RESULT, 2);

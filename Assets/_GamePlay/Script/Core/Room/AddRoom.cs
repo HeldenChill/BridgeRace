@@ -35,7 +35,7 @@ namespace BridgeRace.Core
 
         private int xCount;
         private int zCount;
-        private float timeGenerate = 3f;
+        private float timeGenerate = 15f;
         private int maxNumberColorBrick;
         private int numOfBridge;
 
@@ -111,6 +111,7 @@ namespace BridgeRace.Core
             {
                 Vector2Int pos = eatBrickToPos[instanceID];
                 eatBrickToPos.Remove(instanceID);
+                float time = Random.Range(timeGenerate - 5, timeGenerate + 5);
                 posToTimer[pos].Start(timeGenerate, pos);
                 colorCanGenerate.Add(color);
             }

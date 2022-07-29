@@ -18,14 +18,16 @@ namespace BridgeRace.Core.Character.NavigationSystem
 
         public void ReceiveInformation(WorldInterfaceData Data)
         {
+            Parameter.IsHaveGround = Data.IsHaveGround;
             Parameter.IsGrounded = Data.IsGrounded;
             Parameter.EatBricks = Data.VisionEatBricks;
         }
 
-        public void SetCharacterInformation(Transform Player, int PlayerInstanceID)
+        public void SetCharacterInformation(Transform Player,Transform SensorTF ,int PlayerInstanceID)
         {
-            Parameter.Player = Player;
+            Parameter.PlayerTF = Player;
             Parameter.PlayerInstanceID = PlayerInstanceID;
+            Parameter.SensorTF = SensorTF;
         }
 
         public void SetCharacterInformation(BrickColor CharacterType)

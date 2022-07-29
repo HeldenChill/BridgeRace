@@ -124,7 +124,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 1}
+  m_Size: {x: 4, y: 0.5, z: 1}
   m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!1 &3190865744982152799
 GameObject:
@@ -250,7 +250,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 1}
+  m_Size: {x: 4, y: 0.5, z: 1}
   m_Center: {x: 0.5, y: 0, z: 0}
 --- !u!1 &8411893251952894240
 GameObject:
@@ -299,4 +299,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fence1: {fileID: 6979803229626549130}
   fence2: {fileID: 1536838946166282160}
-  NumOfBrick: 10
+  NumOfBrick: 30

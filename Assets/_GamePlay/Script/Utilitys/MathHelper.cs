@@ -140,7 +140,7 @@ namespace Utilitys
             }
 
 
-            float vecX = Mathf.Cos(Mathf.Deg2Rad * angle);
+            float vecX = -Mathf.Cos(Mathf.Deg2Rad * angle);
             float vecY = Mathf.Sin(Mathf.Deg2Rad * angle);
             return new Vector2(vecX, vecY);
         }
@@ -195,7 +195,7 @@ namespace Utilitys
         }
         public static Vector2 GetRandomDirection(float min = 0, float max = 360)
         {
-            float angle = GetSystemRandom(min, max);
+            float angle = Random.Range(min, max);
             return AngleToVector(angle);
         }
 

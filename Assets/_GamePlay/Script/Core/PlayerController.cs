@@ -33,7 +33,7 @@ public class PlayerController : AbstractCharacter
 
         LogicSystem.SetCharacterInformation(ContainBrick,SensorTF,gameObject.GetInstanceID());
         LogicSystem.SetCharacterData(Data);
-        NavigationSystem.SetCharacterInformation(gameObject.transform,gameObject.GetInstanceID());
+        NavigationSystem.SetCharacterInformation(gameObject.transform,SensorTF,gameObject.GetInstanceID());
         NavigationSystem.SetCharacterData(Data);
 
         

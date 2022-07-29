@@ -48,18 +48,18 @@ namespace BridgeRace.Manager
         {
             //Debug.Log("Enter");
             // This method is run whenever the playmode state is changed.
-            if (EditorApplication.isPaused)
-            {
-                StopGame();
-            }
-            else
-            {
-                if(Time.timeScale != 0)
-                {
-                    StartGame();
-                }
+            //if (EditorApplication.isPaused)
+            //{
+            //    StopGame();
+            //}
+            //else
+            //{
+            //    if(Time.timeScale != 0)
+            //    {
+            //        StartGame();
+            //    }
                 
-            }
+            //}
             //else if (EditorApplication.isPlaying)
             //{
             //    StartGame();
