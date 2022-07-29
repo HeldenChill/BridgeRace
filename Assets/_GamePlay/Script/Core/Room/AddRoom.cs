@@ -135,6 +135,8 @@ namespace BridgeRace.Core
             {
                 i.Value.Stop();
             }
+            
+            //eatBricks.Clear();
         }
         private void InitializeBridge()
         {

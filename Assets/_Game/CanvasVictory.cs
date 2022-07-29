@@ -39,7 +39,7 @@ namespace BridgeRace.UI
         public void MainMenuButton()
         {
             UIManager.Inst.OpenUI(UIID.UICMainMenu);
-
+            GameManager.Inst.StopGame();
             Close();
         }
     }

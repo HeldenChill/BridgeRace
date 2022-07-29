@@ -54,6 +54,7 @@ namespace BridgeRace.Core
 
                 cc.enabled = false;
                 cc.transform.position = new Vector3(x + i * 4, 2, z);
+                cc.transform.rotation = Quaternion.Euler(0, 0, 0);
                 cc.enabled = true;
 
             }

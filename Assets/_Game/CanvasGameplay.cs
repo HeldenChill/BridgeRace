@@ -17,6 +17,7 @@ namespace BridgeRace.UI
 
         float timeRemaining = 3f;
         bool isShowBanner = true;
+        int oldFrameCount;
 
         public void StartGame()
         {           
@@ -24,10 +25,12 @@ namespace BridgeRace.UI
             optionMenuButton.SetActive(false);
             timerBanner.SetActive(true);
             isShowBanner = true;
+            oldFrameCount = Time.frameCount;
         }
 
         private void Update()
         {
+
             if (isShowBanner)
             {
                 if (timeRemaining > -0.5f)
@@ -39,11 +42,11 @@ namespace BridgeRace.UI
                 {
                     if (!GameManager.Inst.GameIsRun)
                     {
-                        GameManager.Inst.StartGame();
-                        timerBanner.SetActive(false);
-                        optionMenuButton.SetActive(true);
-                        isShowBanner = false;
+                        GameManager.Inst.StartGame();                        
                     }
+                    timerBanner.SetActive(false);
+                    optionMenuButton.SetActive(true);
+                    isShowBanner = false;
                 }
             }
             

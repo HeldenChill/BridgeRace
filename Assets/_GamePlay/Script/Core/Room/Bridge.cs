@@ -54,8 +54,9 @@ namespace BridgeRace.Core
         {
             for(int  i = 0; i < bridgeBricks.Count; i++)
             {
-                PrefabManager.Inst.PushToPool(bridgeBricks[i], PrefabManager.BRIDGE_BRICK, false);
+                PrefabManager.Inst.PushToPool(bridgeBricks[i], PrefabManager.BRIDGE_BRICK, false);               
             }
+            bridgeBricks.Clear();
         }
     }
 }

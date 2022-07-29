@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace BridgeRace.Manager
 {
@@ -37,7 +40,31 @@ namespace BridgeRace.Manager
 
             UIManager.Inst.OpenUI(UIID.UICMainMenu);
             StopGame();
+            EditorApplication.pauseStateChanged += HandleOnPlayModeChanged;
+        }
 
+
+        void HandleOnPlayModeChanged(PauseState mode)
+        {
+            //Debug.Log("Enter");
+            // This method is run whenever the playmode state is changed.
+            if (EditorApplication.isPaused)
+            {
+                StopGame();
+            }
+            else
+            {
+                if(Time.timeScale != 0)
+                {
+                    StartGame();
+                }
+                
+            }
+            //else if (EditorApplication.isPlaying)
+            //{
+            //    StartGame();
+            //    Debug.Log("Start Game");
+            //}
         }
 
         public void StartGame()
