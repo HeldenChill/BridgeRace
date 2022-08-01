@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BridgeRace.Core.Character.NavigationSystem
 {
-    using Utilitys;
+    using Utilitys.Input;
     public class InputModule : AbstractNavigationModule
     {
         [SerializeField]

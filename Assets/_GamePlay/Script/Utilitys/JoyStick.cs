@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Utilitys
+namespace Utilitys.Input
 {
     public class JoyStick : MonoBehaviour, IPointerUpHandler, IDragHandler, IPointerDownHandler
     {
@@ -17,8 +17,13 @@ namespace Utilitys
         private int dragOffsetDistance = 100;
 
         public event Action<Vector2> OnMove;
+        private void Awake()
+        {
+            joystickTransform = (RectTransform)transform;
+        }
         public void OnDrag(PointerEventData eventData)
         {
+            //Debug.Log("On Drag");
             Vector2 offset;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 joystickTransform,
@@ -53,10 +58,7 @@ namespace Utilitys
             //Debug.Log("On Pointer Up");
         }
 
-        private void Awake()
-        {
-            joystickTransform = (RectTransform)transform;
-        }
+        
 
     }
 }

@@ -101,7 +101,7 @@ namespace Utilitys
         public static Vector2 GetMouse2DPosition()
         {          
             Vector3 worldPosition;
-            Vector3 mousePos = Input.mousePosition;
+            Vector3 mousePos = UnityEngine.Input.mousePosition;
             Camera mainCamera = Camera.main;
             //mousePos.z = Player.mainCamera.nearClipPlane;
             //worldPosition = Player.mainCamera.ScreenToWorldPoint(mousePos); //Draw a line through 2 point,center of camera and mousePos
